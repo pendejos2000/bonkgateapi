@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Menu, Globe } from "lucide-react"
+import { Menu, Globe, TrendingUp } from "lucide-react"
 import HeroSection from "@/components/hero-section"
 import Footer from "@/components/footer"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -57,15 +57,25 @@ export default function HomePage() {
                     </div>
                     <div className="flex-1 p-6">
                       <nav className="space-y-4">
-                        <a href="#features" className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl">
-                          Features
-                        </a>
-                        <a href="#" className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl">
+                        <a
+                          href="https://docs.bonkgate.fun/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl"
+                        >
                           Documentation
                         </a>
                         <Link href="/support" className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl">
                           Support
                         </Link>
+                        <a
+                          href="https://letsbonk.fun/token/3gy2xMouoB4awZKZeB8Cgwa3Gco2jh5BPmyDBKdWbonk"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl"
+                        >
+                          Trade $GATE
+                        </a>
                       </nav>
                     </div>
                     <div className="p-6 border-t-4 border-black">
@@ -89,7 +99,7 @@ export default function HomePage() {
             </div>
 
             {/* Desktop navigation */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-4">
               <nav className="flex items-center gap-6">
                 <a
                   href="https://docs.bonkgate.fun/"
@@ -103,15 +113,35 @@ export default function HomePage() {
                   Support
                 </Link>
               </nav>
-              <Button
-                asChild
-                className="bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-              >
-                <a href="https://github.com/BonkGate-Labs/BonkGate-Extension" target="_blank" rel="noopener noreferrer">
-                  <Globe className="mr-2 h-4 w-4" />
-                  Add to Browser
-                </a>
-              </Button>
+              <div className="flex items-center gap-3">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="bg-green-500 hover:bg-green-600 text-white border-2 border-black rounded-xl font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                >
+                  <a
+                    href="https://letsbonk.fun/token/3gy2xMouoB4awZKZeB8Cgwa3Gco2jh5BPmyDBKdWbonk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <TrendingUp className="mr-2 h-4 w-4" />
+                    Trade $GATE
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  className="bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                >
+                  <a
+                    href="https://github.com/BonkGate-Labs/BonkGate-Extension"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Globe className="mr-2 h-4 w-4" />
+                    Add to Browser
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </header>
