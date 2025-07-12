@@ -116,8 +116,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3">
                 <Button
                   asChild
-                  variant="outline"
-                  className="bg-green-500 hover:bg-green-600 text-white border-2 border-black rounded-xl font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                  className="bg-green-500 hover:bg-green-600 text-white rounded-xl border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 >
                   <a
                     href="https://letsbonk.fun/token/3gy2xMouoB4awZKZeB8Cgwa3Gco2jh5BPmyDBKdWbonk"
