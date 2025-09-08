@@ -9,14 +9,15 @@ import {
   Trash2,
   Edit,
   UserCheck,
+  ArrowRight,
   X,
   Play,
   Expand,
+  FileText,
   Zap,
   Shield,
-  Download,
-  BookOpen,
 } from "lucide-react"
+import Image from "next/image"
 import { useState, useRef } from "react"
 import RoadmapSection from "./roadmap-section"
 
@@ -49,7 +50,7 @@ export default function HeroSection() {
       {/* Video Pop-up */}
       {isVideoOpen && (
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-full max-w-md">
-          <Card className="border-2 border-cyber-red bg-cyber-darker terminal-glow overflow-hidden">
+          <Card className="border-2 border-cyber-red bg-cyber-dark terminal-glow overflow-hidden">
             <div className="flex items-center justify-between p-3 border-b-2 border-cyber-red bg-cyber-dark">
               <h3 className="font-bold text-lg text-cyber-red terminal-glow">[DEMO_VIDEO]</h3>
               <div className="flex items-center gap-1">
@@ -57,7 +58,7 @@ export default function HeroSection() {
                   onClick={handleFullscreen}
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 text-terminal-green hover:text-cyber-red hover:bg-cyber-red/20"
+                  className="h-8 w-8 text-cyber-green hover:text-cyber-red hover:bg-cyber-red/20"
                 >
                   <Expand className="h-5 w-5" />
                 </Button>
@@ -71,7 +72,7 @@ export default function HeroSection() {
                 </Button>
               </div>
             </div>
-            <div className="bg-cyber-darker">
+            <div className="bg-cyber-dark">
               <video ref={videoRef} className="w-full h-auto" controls autoPlay onEnded={closeVideoModal}>
                 <source
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cursorful-video-1752355234862-8dH7YbbgQn528p6WPH6j0lgbNOuMrJ.mp4"
@@ -85,64 +86,71 @@ export default function HeroSection() {
       )}
 
       {/* Hero */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto text-center">
-            <div className="mb-8">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                <span className="text-cyber-green terminal-glow">[BONK</span>
-                <span className="text-cyber-red terminal-glow">GATE]</span>
-              </h1>
-              <div className="text-xl md:text-2xl text-cyber-green/80 mb-4 font-mono">
-                {"> The Ultimate Crypto-Twitter Intelligence Browser Extension"}
+      <div className="text-center space-y-8 relative">
+        <div className="space-y-6">
+          <div className="flex justify-center mb-8">
+            <div className="relative">
+              <div className="w-32 h-32 border-2 border-cyber-red bg-cyber-dark terminal-glow overflow-hidden">
+                <Image
+                  src="/images/bonkgate-logo.png"
+                  alt="BonkGate Detective Logo"
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover filter brightness-0 invert"
+                />
               </div>
-            </div>
-
-            <p className="text-lg md:text-xl text-cyber-green/70 max-w-4xl mx-auto mb-12 font-mono leading-relaxed">
-              {
-                "> Track deleted tweets, monitor token addresses, analyze follower changes,\n  and uncover hidden crypto Twitter activities with real-time intelligence"
-              }
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-              <Button
-                asChild
-                size="lg"
-                className="bg-cyber-red hover:bg-red-600 text-black font-bold text-lg px-8 py-4 border-2 border-cyber-red shadow-[0_0_20px_rgba(255,0,64,0.5)] hover:shadow-[0_0_30px_rgba(255,0,64,0.8)] transition-all duration-300 animate-pulse-red"
-              >
-                <a href="https://github.com/BonkGate-Labs/BonkGate-Extension" target="_blank" rel="noopener noreferrer">
-                  <Download className="w-5 h-5 mr-2" />
-                  {"[ADD_TO_BROWSER]"}
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="bg-transparent border-2 border-cyber-green text-cyber-green hover:bg-cyber-green hover:text-black font-bold text-lg px-8 py-4 shadow-[0_0_20px_rgba(0,255,65,0.3)] hover:shadow-[0_0_30px_rgba(0,255,65,0.6)] transition-all duration-300"
-              >
-                <a href="https://docs.bonkgate.fun/" target="_blank" rel="noopener noreferrer">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  {"[INSTALLATION_GUIDE]"}
-                </a>
-              </Button>
-            </div>
-
-            {/* ASCII Art Style Logo */}
-            <div className="text-cyber-green/30 font-mono text-xs leading-none mb-8 hidden md:block">
-              <pre>{`
-    ██████╗  ██████╗ ███╗   ██╗██╗  ██╗ ██████╗  █████╗ ████████╗███████╗
-    ██╔══██╗██╔═══██╗████╗  ██║██║ ██╔╝██╔════╝ ██╔══██╗╚══██╔══╝██╔════╝
-    ██████╔╝██║   ██║██╔██╗ ██║█████╔╝ ██║  ███╗███████║   ██║   █████╗  
-    ██╔══██╗██║   ██║██║╚██╗██║██╔═██╗ ██║   ██║██╔══██║   ██║   ██╔══╝  
-    ██████╔╝╚██████╔╝██║ ╚████║██║  ██╗╚██████╔╝██║  ██║   ██║   ███████╗
-    ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
-              `}</pre>
+              <div className="absolute -top-2 -right-2 w-4 h-4 bg-cyber-red animate-terminal-blink"></div>
             </div>
           </div>
+
+          <div className="space-y-4">
+            <div className="text-cyber-green text-lg font-bold terminal-glow">
+              {">"} INITIALIZING CRYPTO_INTELLIGENCE_SYSTEM...
+            </div>
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight terminal-glow">
+              <span className="text-cyber-green">[</span>
+              BONK<span className="text-cyber-red">GATE</span>
+              <span className="text-cyber-green">]</span>
+            </h1>
+            <div className="text-cyber-red text-xl font-bold terminal-glow">
+              CRYPTO-TWITTER_INTELLIGENCE_PROTOCOL_v2.1
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-4">
+            <p className="text-lg sm:text-xl text-cyber-green terminal-glow">
+              {">"} MISSION: Track deleted tweets, monitor token addresses, analyze follower changes
+            </p>
+            <p className="text-lg sm:text-xl text-cyber-green terminal-glow">
+              {">"} OBJECTIVE: Uncover hidden crypto Twitter activities with real-time intelligence
+            </p>
+          </div>
         </div>
-      </section>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-cyber-red hover:bg-cyber-red/80 text-cyber-dark font-bold text-xl px-8 py-6 border-2 border-cyber-red terminal-glow font-mono"
+          >
+            <a href="https://github.com/BonkGate-Labs/BonkGate-Extension" target="_blank" rel="noopener noreferrer">
+              <Globe className="mr-2 h-6 w-6" />
+              [INSTALL_EXTENSION] <ArrowRight className="ml-2 h-6 w-6" />
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-2 border-cyber-green text-cyber-green hover:bg-cyber-green hover:text-cyber-dark font-bold text-xl px-8 py-6 terminal-glow font-mono bg-transparent"
+          >
+            <a href="https://docs.bonkgate.fun/" target="_blank" rel="noopener noreferrer">
+              <FileText className="mr-2 h-6 w-6" />
+              [READ_DOCS]
+            </a>
+          </Button>
+        </div>
+      </div>
 
       {/* Features Grid */}
       <div id="features" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -151,8 +159,8 @@ export default function HeroSection() {
             <Trash2 className="h-12 w-12 mb-4 terminal-glow" />
             <h3 className="text-2xl font-bold font-mono">[DELETED_TWEETS]</h3>
           </div>
-          <div className="p-6 bg-cyber-darker">
-            <p className="text-terminal-green font-mono">
+          <div className="p-6 bg-cyber-dark">
+            <p className="text-cyber-green font-mono">
               {">"} Track and archive deleted tweets from crypto influencers. Never miss important information that gets
               removed.
             </p>
@@ -164,8 +172,8 @@ export default function HeroSection() {
             <Eye className="h-12 w-12 mb-4 terminal-glow" />
             <h3 className="text-2xl font-bold font-mono">[CA_TRACKING]</h3>
           </div>
-          <div className="p-6 bg-cyber-darker">
-            <p className="text-terminal-green font-mono">
+          <div className="p-6 bg-cyber-dark">
+            <p className="text-cyber-green font-mono">
               {">"} Monitor deleted token addresses and contract changes. Stay ahead of rug pulls and suspicious
               activities.
             </p>
@@ -177,8 +185,8 @@ export default function HeroSection() {
             <Users className="h-12 w-12 mb-4 terminal-glow" />
             <h3 className="text-2xl font-bold font-mono">[FIRST_FOLLOWERS]</h3>
           </div>
-          <div className="p-6 bg-cyber-darker">
-            <p className="text-terminal-green font-mono">
+          <div className="p-6 bg-cyber-dark">
+            <p className="text-cyber-green font-mono">
               {">"} Identify the first followers of new accounts. Discover potential insider connections and early
               supporters.
             </p>
@@ -190,8 +198,8 @@ export default function HeroSection() {
             <Edit className="h-12 w-12 mb-4 terminal-glow" />
             <h3 className="text-2xl font-bold font-mono">[PROFILE_CHANGES]</h3>
           </div>
-          <div className="p-6 bg-cyber-darker">
-            <p className="text-terminal-green font-mono">
+          <div className="p-6 bg-cyber-dark">
+            <p className="text-cyber-green font-mono">
               {">"} Track bio and username changes over time. Monitor rebranding attempts and identity shifts.
             </p>
           </div>
@@ -202,8 +210,8 @@ export default function HeroSection() {
             <UserCheck className="h-12 w-12 mb-4 terminal-glow" />
             <h3 className="text-2xl font-bold font-mono">[KEY_FOLLOWERS]</h3>
           </div>
-          <div className="p-6 bg-cyber-darker">
-            <p className="text-terminal-green font-mono">
+          <div className="p-6 bg-cyber-dark">
+            <p className="text-cyber-green font-mono">
               {">"} Analyze follower networks and identify key influencers. Understand connection patterns in crypto
               Twitter.
             </p>
@@ -215,12 +223,12 @@ export default function HeroSection() {
             <Zap className="h-12 w-12 mb-4 terminal-glow" />
             <h3 className="text-2xl font-bold font-mono">[REAL_TIME_ALERTS]</h3>
           </div>
-          <div className="p-6 bg-cyber-darker opacity-60">
-            <p className="text-terminal-green font-mono">
+          <div className="p-6 bg-cyber-dark opacity-60">
+            <p className="text-cyber-green font-mono">
               {">"} Get instant notifications for suspicious activities, deleted content, and profile changes.
             </p>
           </div>
-          <div className="absolute inset-0 bg-cyber-darker/80 flex items-center justify-center">
+          <div className="absolute inset-0 bg-cyber-dark/80 flex items-center justify-center">
             <div className="bg-cyber-red/20 border-2 border-cyber-red px-6 py-3 terminal-glow">
               <span className="text-xl font-black text-cyber-red font-mono animate-terminal-blink">[COMING_SOON]</span>
             </div>
@@ -238,15 +246,15 @@ export default function HeroSection() {
             <div className="bg-cyber-red text-cyber-dark w-16 h-16 flex items-center justify-center text-2xl font-black mx-auto mb-4 border-2 border-cyber-red terminal-glow font-mono">
               01
             </div>
-            <h3 className="text-xl font-bold mb-2 text-terminal-green font-mono">[INSTALL_EXTENSION]</h3>
-            <p className="text-terminal-green font-mono">{">"} Add BonkGate to your browser with one click</p>
+            <h3 className="text-xl font-bold mb-2 text-cyber-green font-mono">[INSTALL_EXTENSION]</h3>
+            <p className="text-cyber-green font-mono">{">"} Add BonkGate to your browser with one click</p>
           </div>
           <div className="text-center">
             <div className="bg-cyber-red text-cyber-dark w-16 h-16 flex items-center justify-center text-2xl font-black mx-auto mb-4 border-2 border-cyber-red terminal-glow font-mono">
               02
             </div>
-            <h3 className="text-xl font-bold mb-2 text-terminal-green font-mono">[BROWSE_TWITTER]</h3>
-            <p className="text-terminal-green font-mono">
+            <h3 className="text-xl font-bold mb-2 text-cyber-green font-mono">[BROWSE_TWITTER]</h3>
+            <p className="text-cyber-green font-mono">
               {">"} Use Twitter normally while BonkGate tracks everything in the background
             </p>
           </div>
@@ -254,8 +262,8 @@ export default function HeroSection() {
             <div className="bg-cyber-red text-cyber-dark w-16 h-16 flex items-center justify-center text-2xl font-black mx-auto mb-4 border-2 border-cyber-red terminal-glow font-mono">
               03
             </div>
-            <h3 className="text-xl font-bold mb-2 text-terminal-green font-mono">[GET_INTELLIGENCE]</h3>
-            <p className="text-terminal-green font-mono">
+            <h3 className="text-xl font-bold mb-2 text-cyber-green font-mono">[GET_INTELLIGENCE]</h3>
+            <p className="text-cyber-green font-mono">
               {">"} Access detailed analytics and alerts about crypto Twitter activities
             </p>
           </div>
@@ -319,19 +327,19 @@ export default function HeroSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <div className="text-3xl sm:text-4xl font-black text-cyber-red terminal-glow font-mono">&lt; 2s</div>
-            <div className="text-lg font-bold text-terminal-green font-mono">LOADING_TIME</div>
+            <div className="text-lg font-bold text-cyber-green font-mono">LOADING_TIME</div>
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-black text-cyber-red terminal-glow font-mono">1M+</div>
-            <div className="text-lg font-bold text-terminal-green font-mono">TWEETS_TRACKED</div>
+            <div className="text-lg font-bold text-cyber-green font-mono">TWEETS_TRACKED</div>
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-black text-cyber-red terminal-glow font-mono">4K+</div>
-            <div className="text-lg font-bold text-terminal-green font-mono">DELETED_RECOVERED</div>
+            <div className="text-lg font-bold text-cyber-green font-mono">DELETED_RECOVERED</div>
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-black text-cyber-red terminal-glow font-mono">99.9%</div>
-            <div className="text-lg font-bold text-terminal-green font-mono">UPTIME</div>
+            <div className="text-lg font-bold text-cyber-green font-mono">UPTIME</div>
           </div>
         </div>
       </Card>
@@ -343,19 +351,19 @@ export default function HeroSection() {
           <ul className="space-y-3 text-lg font-mono">
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Track influencer sentiment changes</span>
+              <span className="text-cyber-green">Track influencer sentiment changes</span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Monitor token promotion deletions</span>
+              <span className="text-cyber-green">Monitor token promotion deletions</span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Identify pump and dump schemes</span>
+              <span className="text-cyber-green">Identify pump and dump schemes</span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Analyze follower manipulation</span>
+              <span className="text-cyber-green">Analyze follower manipulation</span>
             </li>
           </ul>
         </Card>
@@ -365,19 +373,19 @@ export default function HeroSection() {
           <ul className="space-y-3 text-lg font-mono">
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Archive deleted crypto content</span>
+              <span className="text-cyber-green">Archive deleted crypto content</span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Study influence networks</span>
+              <span className="text-cyber-green">Study influence networks</span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Track narrative evolution</span>
+              <span className="text-cyber-green">Track narrative evolution</span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-2 h-2 bg-cyber-red animate-terminal-blink"></div>
-              <span className="text-terminal-green">Analyze behavioral patterns</span>
+              <span className="text-cyber-green">Analyze behavioral patterns</span>
             </li>
           </ul>
         </Card>

@@ -88,17 +88,6 @@ html {
   color: #ff0040;
 }
 
-@keyframes terminal-blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  51%,
-  100% {
-    opacity: 0;
-  }
-}
-
 /* Ensure smooth scrolling works on all browsers */
 * {
   scroll-behavior: smooth;
