@@ -1,140 +1,128 @@
 "use client"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CheckCircle, Clock } from "lucide-react"
+import { useState } from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { CheckCircle, Circle } from "lucide-react"
 
-export default function RoadmapSection() {
+export function RoadmapSection() {
+  const [activePhase, setActivePhase] = useState(0)
+
+  const phases = [
+    {
+      title: "PHASE_01",
+      subtitle: "FOUNDATION_&_LAUNCH",
+      status: "CURRENT",
+      items: [
+        { text: "Core Extension Launch", completed: true },
+        { text: "Deleted Content Tracking", completed: true },
+        { text: "$GATE Token Integration", completed: true },
+      ],
+    },
+    {
+      title: "PHASE_02",
+      subtitle: "EXPANSION_&_ECOSYSTEM_GROWTH",
+      status: "UPCOMING",
+      items: [
+        { text: "Free access to $GATE Holders", completed: false },
+        { text: "API Access", completed: false },
+        { text: "Community Governance", completed: false },
+        { text: "Private Community", completed: false },
+      ],
+    },
+  ]
+
   return (
-    <div id="roadmap" className="space-y-8 font-mono">
-      <h2 className="text-3xl sm:text-5xl font-black text-center text-cyber-red terminal-glow">
-        [DEVELOPMENT_ROADMAP]
-      </h2>
+    <section id="roadmap" className="py-20 bg-cyber-darker/30">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 terminal-glow">{"[DEVELOPMENT_ROADMAP]"}</h2>
+          <p className="text-xl text-cyber-green/80 font-mono">{"> System deployment timeline and feature rollout"}</p>
+        </div>
 
-      {/* Blobs and Connecting Line */}
-      <div className="flex justify-center items-center gap-2 sm:gap-4">
-        {/* Pulsating Blob 1 */}
-        <div className="relative flex items-center justify-center">
-          <div className="absolute w-20 h-20 sm:w-24 sm:h-24 border-2 border-cyber-red bg-cyber-red/20 animate-pulse-wave" />
-          <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-cyber-red via-red-600 to-red-800 flex items-center justify-center text-white font-black text-4xl sm:text-5xl border-2 border-cyber-red terminal-glow">
-            01
+        {/* Phase Selector */}
+        <div className="flex justify-center mb-12">
+          <div className="flex bg-cyber-gray/30 border-2 border-cyber-red rounded-none p-1">
+            {phases.map((phase, index) => (
+              <button
+                key={index}
+                onClick={() => setActivePhase(index)}
+                className={`px-6 py-3 font-bold transition-all duration-300 ${
+                  activePhase === index
+                    ? "bg-cyber-red text-black shadow-[0_0_10px_rgba(255,0,64,0.5)]"
+                    : "text-cyber-green hover:text-cyber-red"
+                }`}
+              >
+                {"[" + phase.title + "]"}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Connecting Line */}
-        <div className="w-16 sm:w-24 h-1 bg-cyber-red/50 relative">
-          <div className="absolute inset-0 bg-cyber-red animate-pulse"></div>
+        {/* Connection Line */}
+        <div className="flex justify-center mb-8">
+          <div className="flex items-center space-x-4">
+            <div
+              className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
+                activePhase === 0
+                  ? "border-cyber-red bg-cyber-red animate-pulse-red"
+                  : "border-cyber-green bg-cyber-green"
+              }`}
+            >
+              <span className="text-black font-bold text-sm">1</span>
+            </div>
+            <div className="w-24 h-0.5 bg-cyber-green"></div>
+            <div
+              className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
+                activePhase === 1
+                  ? "border-cyber-red bg-cyber-red animate-pulse-red"
+                  : "border-cyber-green bg-cyber-green/30"
+              }`}
+            >
+              <span className="text-black font-bold text-sm">2</span>
+            </div>
+          </div>
         </div>
 
-        {/* Static Blob 2 */}
-        <div className="relative flex items-center justify-center">
-          <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center text-white font-black text-4xl sm:text-5xl border-2 border-gray-600">
-            02
-          </div>
+        {/* Active Phase Content */}
+        <div className="max-w-4xl mx-auto">
+          <Card className="bg-cyber-gray/30 border-2 border-cyber-red hover:shadow-[0_0_20px_rgba(255,0,64,0.3)] transition-all duration-300">
+            <CardContent className="p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold text-cyber-red mb-2 terminal-glow">
+                  {"[" + phases[activePhase].title + "]"}
+                </h3>
+                <p className="text-xl text-cyber-green/80 mb-4 font-mono">{"> " + phases[activePhase].subtitle}</p>
+                <Badge
+                  className={`font-bold text-lg px-4 py-2 ${
+                    phases[activePhase].status === "CURRENT" ? "bg-cyber-red text-black" : "bg-cyber-green text-black"
+                  }`}
+                >
+                  {"[" + phases[activePhase].status + "]"}
+                </Badge>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {phases[activePhase].items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center space-x-3 p-4 bg-cyber-darker/50 border border-cyber-green/30"
+                  >
+                    {item.completed ? (
+                      <CheckCircle className="w-6 h-6 text-cyber-green flex-shrink-0" />
+                    ) : (
+                      <Circle className="w-6 h-6 text-cyber-green/50 flex-shrink-0" />
+                    )}
+                    <span className={`font-mono ${item.completed ? "text-cyber-green" : "text-cyber-green/70"}`}>
+                      {"> " + item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
-
-      {/* Card Folder Tabs */}
-      <Tabs defaultValue="phase1" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 p-0 bg-transparent h-auto gap-2">
-          <TabsTrigger
-            value="phase1"
-            className="flex-1 data-[state=active]:bg-cyber-dark data-[state=active]:text-cyber-red data-[state=active]:border-cyber-red border-2 border-gray-600 p-3 font-bold text-lg relative data-[state=inactive]:bg-cyber-darker data-[state=inactive]:text-terminal-green font-mono terminal-glow"
-          >
-            <div className="absolute top-1.5 right-1.5 bg-terminal-green text-cyber-dark text-[10px] font-bold px-1.5 py-0.5 border border-terminal-green font-mono">
-              ACTIVE
-            </div>
-            [PHASE_01]
-          </TabsTrigger>
-          <TabsTrigger
-            value="phase2"
-            className="flex-1 data-[state=active]:bg-cyber-dark data-[state=active]:text-cyber-red data-[state=active]:border-cyber-red border-2 border-gray-600 p-3 font-bold text-lg relative data-[state=inactive]:bg-cyber-darker data-[state=inactive]:text-terminal-green font-mono terminal-glow"
-          >
-            [PHASE_02]
-          </TabsTrigger>
-        </TabsList>
-        <div className="border-2 border-cyber-red bg-cyber-dark terminal-glow">
-          <TabsContent value="phase1" className="p-6 mt-0">
-            <h3 className="text-xl font-bold mb-2 text-cyber-red font-mono terminal-glow">[FOUNDATION_&_LAUNCH]</h3>
-            <p className="text-terminal-green mb-4 text-sm font-mono">
-              {">"} This phase focuses on building the core infrastructure and launching the essential features of
-              BonkGate.
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-terminal-green flex-shrink-0 mt-0.5 terminal-glow" />
-                <div>
-                  <h4 className="font-bold text-base text-cyber-red font-mono">[CORE_EXTENSION_LAUNCH]</h4>
-                  <p className="text-xs text-terminal-green font-mono">
-                    {">"} Initial release on the Chrome Web Store.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-terminal-green flex-shrink-0 mt-0.5 terminal-glow" />
-                <div>
-                  <h4 className="font-bold text-base text-cyber-red font-mono">[DELETED_CONTENT_TRACKING]</h4>
-                  <p className="text-xs text-terminal-green font-mono">{">"} Real-time monitoring of tweets and CAs.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-terminal-green flex-shrink-0 mt-0.5 terminal-glow" />
-                <div>
-                  <h4 className="font-bold text-base text-cyber-red font-mono">[$GATE_TOKEN_INTEGRATION]</h4>
-                  <p className="text-xs text-terminal-green font-mono">
-                    {">"} Utility token for subscription-free access.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </TabsContent>
-          <TabsContent value="phase2" className="p-6 mt-0">
-            <h3 className="text-xl font-bold mb-2 text-cyber-red font-mono terminal-glow">
-              [EXPANSION_&_ECOSYSTEM_GROWTH]
-            </h3>
-            <p className="text-terminal-green mb-4 text-sm font-mono">
-              {">"} This phase will expand capabilities, introduce governance, and build a robust ecosystem.
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[FREE_ACCESS_TO_$GATE_HOLDERS]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} Token holders get premium access without subscriptions.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[API_ACCESS]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} Public API for developers and third-party integrations.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[COMMUNITY_GOVERNANCE]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} DAO voting system for feature development decisions.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[PRIVATE_COMMUNITY]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} Exclusive access to private channels and discussions.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </TabsContent>
-        </div>
-      </Tabs>
-    </div>
+    </section>
   )
 }
