@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -53,9 +53,12 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        bonk: {
-          orange: "#FF4D00",
-        },
+        "cyber-red": "#FF0040",
+        "cyber-dark": "#0A0A0A",
+        "cyber-darker": "#050505",
+        "cyber-green": "#00FF41",
+        "terminal-green": "#00FF00",
+        "bonk-orange": "#FF4D00",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,20 +74,63 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "slide-in-up": {
-          from: { transform: "translateY(100%)", opacity: "0" },
-          to: { transform: "translateY(0)", opacity: "1" },
-        },
         "pulse-wave": {
-          "0%": { transform: "scale(1)", opacity: "0.5" },
-          "100%": { transform: "scale(2)", opacity: "0" },
+          "0%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "50%": {
+            transform: "scale(1.1)",
+            opacity: "0.7",
+          },
+          "100%": {
+            transform: "scale(1.2)",
+            opacity: "0",
+          },
+        },
+        glitch: {
+          "0%": {
+            transform: "translate(0)",
+          },
+          "20%": {
+            transform: "translate(-2px, 2px)",
+          },
+          "40%": {
+            transform: "translate(-2px, -2px)",
+          },
+          "60%": {
+            transform: "translate(2px, 2px)",
+          },
+          "80%": {
+            transform: "translate(2px, -2px)",
+          },
+          "100%": {
+            transform: "translate(0)",
+          },
+        },
+        "terminal-blink": {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0" },
+        },
+        "scan-line": {
+          "0%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(100vh)",
+          },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "slide-in-up": "slide-in-up 0.3s ease-out",
         "pulse-wave": "pulse-wave 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        glitch: "glitch 0.3s ease-in-out infinite",
+        "terminal-blink": "terminal-blink 1s step-end infinite",
+        "scan-line": "scan-line 2s linear infinite",
+      },
+      fontFamily: {
+        mono: ["JetBrains Mono", "Fira Code", "Consolas", "Monaco", "Courier New", "monospace"],
       },
     },
   },
