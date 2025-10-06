@@ -1,5 +1,5 @@
 "use client"
-
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -24,6 +24,17 @@ import Image from "next/image"
 
 export default function SupportPage() {
   const [state, formAction, isPending] = useActionState(submitSupportTicket, null)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    telegram: "",
+    category: "",
+    message: "",
+  })
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-2 sm:p-4">
@@ -87,6 +98,8 @@ export default function SupportPage() {
                         type="text"
                         placeholder="Your full name"
                         className="border-2 border-black rounded-xl p-3 text-lg"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange("name", e.target.value)}
                         required
                       />
                     </div>
@@ -103,6 +116,8 @@ export default function SupportPage() {
                         type="email"
                         placeholder="your.email@example.com"
                         className="border-2 border-black rounded-xl p-3 text-lg"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
                         required
                       />
                     </div>
@@ -119,6 +134,8 @@ export default function SupportPage() {
                         type="text"
                         placeholder="@yourusername"
                         className="border-2 border-black rounded-xl p-3 text-lg"
+                        value={formData.telegram}
+                        onChange={(e) => handleInputChange("telegram", e.target.value)}
                       />
                     </div>
 
@@ -130,6 +147,8 @@ export default function SupportPage() {
                       </Label>
                       <select
                         name="category"
+                        value={formData.category}
+                        onChange={(e) => handleInputChange("category", e.target.value)}
                         className="w-full border-2 border-black rounded-xl p-3 text-lg bg-white"
                         required
                       >
@@ -155,15 +174,15 @@ export default function SupportPage() {
                         name="message"
                         placeholder="Please describe your issue in detail. Include any error messages, steps to reproduce the problem, and your browser/OS information if relevant."
                         className="min-h-[150px] border-2 border-black rounded-xl p-3 text-lg resize-none"
+                        value={formData.message}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
                         required
                       />
                     </div>
 
                     {state?.success && (
                       <div className="p-4 bg-green-100 border-2 border-black rounded-xl">
-                        <p className="font-bold text-green-800">
-                          Thank you! Your support ticket has been submitted successfully.
-                        </p>
+                        <p className="font-bold text-green-800">{state.message}</p>
                       </div>
                     )}
                     {state?.success === false && (
