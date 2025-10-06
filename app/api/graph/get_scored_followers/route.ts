@@ -23,7 +23,7 @@ export async function GET(request: Request) {
     const page = Number.parseInt(searchParams.get("page") || "1")
 
     if (!user) {
-      return NextResponse.json({ error: "user parameter is required" }, { status: 400, headers: corsHeaders })
+      return NextResponse.json({ error: "User parameter is required" }, { status: 400, headers: corsHeaders })
     }
 
     const api = new TotoApi()
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     const { user, how = "username", page = 1 } = body
 
     if (!user) {
-      return NextResponse.json({ error: "user parameter is required" }, { status: 400, headers: corsHeaders })
+      return NextResponse.json({ error: "User parameter is required" }, { status: 400, headers: corsHeaders })
     }
 
     const api = new TotoApi()
