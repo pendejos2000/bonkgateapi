@@ -15,7 +15,6 @@ export default function HomePage() {
         <header className="sticky top-0 z-50 border-b-4 border-black p-4 sm:p-6 bg-white/40 backdrop-blur-md rounded-t-[22px]">
           <div className="flex justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              {/* Updated desktop header logo */}
               <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-black flex-shrink-0">
                 <Image
                   src="/images/fys-logo.png"
@@ -42,7 +41,6 @@ export default function HomePage() {
                   <div className="h-full bg-white/40 backdrop-blur-md flex flex-col">
                     <div className="p-6 border-b-4 border-black">
                       <div className="flex items-center gap-2">
-                        {/* Updated mobile menu header logo */}
                         <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-black flex-shrink-0">
                           <Image
                             src="/images/fys-logo.png"
