@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                 <Image
-                  src="/images/bonkgate-logo.png"
+                  src="/images/fys-hand-logo.jpg"
                   alt="FourYourSafety Detective Logo"
                   width={48}
                   height={48}
