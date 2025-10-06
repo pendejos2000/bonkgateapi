@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -18,6 +18,7 @@ import {
   AlertCircle,
   MessageCircle,
   Clock,
+  CheckCircle,
 } from "lucide-react"
 import Link from "next/link"
 import { submitSupportTicket } from "./actions"
@@ -33,13 +34,57 @@ export default function SupportPage() {
     category: "",
     message: "",
   })
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  // Handle success state
+  useEffect(() => {
+    if (state?.success) {
+      setShowSuccessModal(true)
+      // Clear form fields
+      setFormData({
+        name: "",
+        email: "",
+        telegram: "",
+        category: "",
+        message: "",
+      })
+      // Auto-close modal after 5 seconds
+      const timer = setTimeout(() => {
+        setShowSuccessModal(false)
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [state?.success])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-2 sm:p-4">
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="w-full max-w-md bg-white border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 animate-in fade-in zoom-in duration-300">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center border-4 border-black">
+                <CheckCircle className="h-10 w-10 text-white" />
+              </div>
+              <h2 className="text-3xl font-black">Success!</h2>
+              <p className="text-lg text-gray-700">
+                Your support ticket has been submitted successfully. Our team will get back to you within 24 hours.
+              </p>
+              <Button
+                onClick={() => setShowSuccessModal(false)}
+                className="bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="w-full max-w-4xl mx-auto backdrop-blur-xl bg-white/30 border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
         {/* Header */}
         <header className="border-b-4 border-black p-4 sm:p-6 bg-white/40 backdrop-blur-md">
@@ -182,11 +227,6 @@ export default function SupportPage() {
                       />
                     </div>
 
-                    {state?.success && (
-                      <div className="p-4 bg-green-100 border-2 border-black rounded-xl">
-                        <p className="font-bold text-green-800">{state.message}</p>
-                      </div>
-                    )}
                     {state?.success === false && (
                       <div className="p-4 bg-red-100 border-2 border-black rounded-xl flex items-start gap-3">
                         <Clock className="h-5 w-5 text-red-800 flex-shrink-0 mt-0.5" />
