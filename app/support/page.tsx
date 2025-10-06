@@ -6,7 +6,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { ArrowLeft, Mail, MessageSquare, BookOpen, ExternalLink } from "lucide-react"
+import {
+  ArrowLeft,
+  Mail,
+  MessageSquare,
+  BookOpen,
+  ExternalLink,
+  Send,
+  User,
+  AlertCircle,
+  MessageCircle,
+} from "lucide-react"
 import Link from "next/link"
 import { submitSupportTicket } from "./actions"
 import { useActionState } from "react"
@@ -66,63 +76,117 @@ export default function SupportPage() {
                 <CardContent>
                   <form action={formAction} className="space-y-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
+                      <Label htmlFor="name" className="text-lg font-bold flex items-center gap-2">
+                        <User className="h-4 w-4" />
+                        Name
+                        <span className="text-bonk-orange">*</span>
+                      </Label>
                       <Input
                         id="name"
                         name="name"
-                        placeholder="Your name"
+                        type="text"
+                        placeholder="Your full name"
+                        className="border-2 border-black rounded-xl p-3 text-lg"
                         required
-                        className="border-2 border-black rounded-xl"
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className="text-lg font-bold flex items-center gap-2">
+                        <Mail className="h-4 w-4" />
+                        Email
+                        <span className="text-bonk-orange">*</span>
+                      </Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
                         placeholder="your.email@example.com"
+                        className="border-2 border-black rounded-xl p-3 text-lg"
                         required
-                        className="border-2 border-black rounded-xl"
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="subject">Subject</Label>
+                      <Label htmlFor="telegram" className="text-lg font-bold flex items-center gap-2">
+                        <MessageCircle className="h-4 w-4" />
+                        Telegram Username
+                        <span className="text-gray-500 text-sm font-normal">(optional)</span>
+                      </Label>
                       <Input
-                        id="subject"
-                        name="subject"
-                        placeholder="Brief description of your issue"
-                        required
-                        className="border-2 border-black rounded-xl"
+                        id="telegram"
+                        name="telegram"
+                        type="text"
+                        placeholder="@yourusername"
+                        className="border-2 border-black rounded-xl p-3 text-lg"
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="message">Message</Label>
+                      <Label htmlFor="category" className="text-lg font-bold flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4" />
+                        Issue Category
+                        <span className="text-bonk-orange">*</span>
+                      </Label>
+                      <select
+                        name="category"
+                        className="w-full border-2 border-black rounded-xl p-3 text-lg bg-white"
+                        required
+                      >
+                        <option value="">Select an issue category</option>
+                        <option value="installation">Installation Issues</option>
+                        <option value="features">Feature Not Working</option>
+                        <option value="performance">Performance Issues</option>
+                        <option value="data">Data/Tracking Issues</option>
+                        <option value="account">Account Issues</option>
+                        <option value="billing">Billing Questions</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="message" className="text-lg font-bold flex items-center gap-2">
+                        <MessageCircle className="h-4 w-4" />
+                        Message
+                        <span className="text-bonk-orange">*</span>
+                      </Label>
                       <Textarea
                         id="message"
                         name="message"
-                        placeholder="Please provide as much detail as possible..."
+                        placeholder="Please describe your issue in detail. Include any error messages, steps to reproduce the problem, and your browser/OS information if relevant."
+                        className="min-h-[150px] border-2 border-black rounded-xl p-3 text-lg resize-none"
                         required
-                        rows={6}
-                        className="border-2 border-black rounded-xl"
                       />
                     </div>
+
                     {state?.success && (
                       <div className="p-4 bg-green-100 border-2 border-black rounded-xl">
-                        <p className="font-bold text-green-800">{state.message}</p>
+                        <p className="font-bold text-green-800">
+                          Thank you! Your support ticket has been submitted successfully.
+                        </p>
                       </div>
                     )}
                     {state?.success === false && (
                       <div className="p-4 bg-red-100 border-2 border-black rounded-xl">
-                        <p className="font-bold text-red-800">{state.message}</p>
+                        <p className="font-bold text-red-800">
+                          {state.error || "Failed to submit ticket. Please try again."}
+                        </p>
                       </div>
                     )}
+
                     <Button
                       type="submit"
                       disabled={isPending}
-                      className="w-full bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                      className="w-full bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold text-xl py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-2px] transition-transform"
                     >
-                      {isPending ? "Sending..." : "Send Message"}
+                      {isPending ? (
+                        "Submitting..."
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-5 w-5" />
+                          Submit Support Ticket
+                        </>
+                      )}
                     </Button>
                   </form>
                 </CardContent>
