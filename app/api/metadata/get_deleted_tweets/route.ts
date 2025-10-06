@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { TotoApi, filterCredits } from "../../utils/totoApi"
+import { TotoApi } from "../utils/totoApi"
 
 export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -10,27 +10,21 @@ export const corsHeaders = {
   "Access-Control-Max-Age": "86400",
 }
 
-// Handle OPTIONS request for CORS preflight
 export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders })
 }
 
-export async function GET(request: Request) {
+export async function GET(request: Request, context: { params: { username: string } }) {
   try {
-    const { searchParams } = new URL(request.url)
-    const user = searchParams.get("user")
-    const how = searchParams.get("how") || "username"
-    const page = Number.parseInt(searchParams.get("page") || "1")
-
-    if (!user) {
-      return NextResponse.json({ error: "User parameter is required" }, { status: 400, headers: corsHeaders })
+    const username = context?.params?.username
+    if (!username) {
+      return NextResponse.json({ error: "username parameter is required" }, { status: 400, headers: corsHeaders })
     }
 
     const api = new TotoApi()
-    const data = await api.getDeletedTweets(user, how, page)
-    const filteredData = filterCredits(data)
+    const data = await api.getDeletedTweets(username)
 
-    return NextResponse.json(filteredData, { headers: corsHeaders })
+    return NextResponse.json(data, { headers: corsHeaders })
   } catch (error) {
     console.error("Error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: corsHeaders })
@@ -40,17 +34,16 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { user, how = "username", page = 1 } = body
+    const { username } = body
 
-    if (!user) {
-      return NextResponse.json({ error: "User parameter is required" }, { status: 400, headers: corsHeaders })
+    if (!username) {
+      return NextResponse.json({ error: "username is required" }, { status: 400, headers: corsHeaders })
     }
 
     const api = new TotoApi()
-    const data = await api.getDeletedTweets(user, how, page)
-    const filteredData = filterCredits(data)
+    const data = await api.getDeletedTweets(username)
 
-    return NextResponse.json(filteredData, { headers: corsHeaders })
+    return NextResponse.json(data, { headers: corsHeaders })
   } catch (error) {
     console.error("Error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: corsHeaders })

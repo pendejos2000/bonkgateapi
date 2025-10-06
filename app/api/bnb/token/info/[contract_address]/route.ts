@@ -10,7 +10,6 @@ export const corsHeaders = {
   "Access-Control-Max-Age": "86400",
 }
 
-// Handle OPTIONS request for CORS preflight
 export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders })
 }
@@ -23,17 +22,14 @@ export async function GET(request: NextRequest, { params }: { params: { contract
       return NextResponse.json({ error: "Contract address is required" }, { status: 400, headers: corsHeaders })
     }
 
-    // Get query parameters
     const searchParams = request.nextUrl.searchParams
     const query: Record<string, string | number | boolean | Array<string | number | boolean>> = {}
 
     searchParams.forEach((value, key) => {
-      // Handle array parameters
       const allValues = searchParams.getAll(key)
       if (allValues.length > 1) {
         query[key] = allValues
       } else {
-        // Try to parse as number or boolean
         if (value === "true") query[key] = true
         else if (value === "false") query[key] = false
         else if (!isNaN(Number(value))) query[key] = Number(value)
