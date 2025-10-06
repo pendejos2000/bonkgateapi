@@ -1,52 +1,42 @@
-import { NextResponse } from 'next/server';
-import { TotoApi, filterCredits } from '../../utils/totoApi';
-import { processTweets, TweetResponse } from '../../utils/tweetUtils';
- 
-export const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version',
-  'Access-Control-Allow-Credentials': 'true',
-  'Access-Control-Max-Age': '86400',
-};
- 
-// Handle OPTIONS request for CORS preflight
-export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders });
-}
- 
-export async function POST(request: Request) {
+import { type NextRequest, NextResponse } from "next/server"
+import { TotoApi } from "../../utils/totoApi"
+
+export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
-    const user = data.user;
-    const how = data.how || 'username';
-    const page = data.page || 1;
- 
+    const body = await request.json()
+    const { user, how = "username", page = 1 } = body
+
     if (!user) {
-      return NextResponse.json({ error: 'User parameter is required' }, 
-        { status: 400, headers: corsHeaders });
+      return NextResponse.json({ error: "User parameter is required" }, { status: 400 })
     }
- 
-    const api = new TotoApi();
- 
-    // Get deleted tweets
-    const deletedResult = await api.getDeletedTweets(user, how, page) as unknown as TweetResponse;
- 
-    // Get latest tweets
-    const latestResult = await api.getLatestTweets(user, how, page) as unknown as TweetResponse;
- 
-    // Process tweets according to business logic
-    const processedResult = processTweets(deletedResult, latestResult);
- 
-    // Filter out credits from the response
-    const filteredResult = filterCredits(processedResult);
- 
-    return NextResponse.json(filteredResult, { headers: corsHeaders });
+
+    const api = new TotoApi()
+    const data = await api.getDeletedTweets(user, how, page)
+
+    return NextResponse.json(data)
   } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500, headers: corsHeaders }
-    );
+    console.error("Error fetching deleted tweets:", error)
+    return NextResponse.json({ error: "Failed to fetch deleted tweets" }, { status: 500 })
   }
-} 
+}
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams
+  const user = searchParams.get("user")
+  const how = searchParams.get("how") || "username"
+  const page = Number.parseInt(searchParams.get("page") || "1")
+
+  if (!user) {
+    return NextResponse.json({ error: "User parameter is required" }, { status: 400 })
+  }
+
+  try {
+    const api = new TotoApi()
+    const data = await api.getDeletedTweets(user, how, page)
+
+    return NextResponse.json(data)
+  } catch (error) {
+    console.error("Error fetching deleted tweets:", error)
+    return NextResponse.json({ error: "Failed to fetch deleted tweets" }, { status: 500 })
+  }
+}

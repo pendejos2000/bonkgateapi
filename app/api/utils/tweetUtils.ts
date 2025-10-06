@@ -1,73 +1,87 @@
 export interface Tweet {
-    id: string;
-    text: string;
-    [key: string]: any;
+  id: string
+  text: string
+  created_at: string
+  author_id?: string
+  public_metrics?: {
+    retweet_count: number
+    reply_count: number
+    like_count: number
+    quote_count: number
   }
-   
-  export interface TweetResponse {
-    tweets: Tweet[];
-    count: number;
-    [key: string]: any;
+}
+
+export interface TweetResponse {
+  data: Tweet[]
+  meta?: {
+    result_count: number
+    next_token?: string
   }
-   
-  /**
-   * Filters tweets containing Ethereum addresses
-   */
-  export function filterTweetsWithAddresses(tweets: Tweet[]): Tweet[] {
-    // Match 0x followed by 40 hex characters (standard Ethereum address format)
-    const pattern = /0x[a-fA-F0-9]{40}/;
-   
-    return tweets.filter(tweet => {
-      const text = tweet.text || '';
-      return pattern.test(text);
-    });
-  }
-   
-  /**
-   * Combines two lists of tweets and removes duplicates based on ID
-   */
-  export function combineTweets(deletedTweets: Tweet[], latestTweets: Tweet[]): Tweet[] {
-    const allTweets = [...deletedTweets, ...latestTweets];
-    const uniqueTweets: Tweet[] = [];
-    const seenIds = new Set<string>();
-   
-    for (const tweet of allTweets) {
-      const tweetId = tweet.id;
-      if (!seenIds.has(tweetId)) {
-        seenIds.add(tweetId);
-        uniqueTweets.push(tweet);
+}
+
+export function formatTweetDate(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
+
+export function formatTweetText(text: string, maxLength = 280): string {
+  if (text.length <= maxLength) return text
+  return text.substring(0, maxLength - 3) + "..."
+}
+
+export function extractHashtags(text: string): string[] {
+  const hashtagRegex = /#[\w]+/g
+  return text.match(hashtagRegex) || []
+}
+
+export function extractMentions(text: string): string[] {
+  const mentionRegex = /@[\w]+/g
+  return text.match(mentionRegex) || []
+}
+
+export function extractUrls(text: string): string[] {
+  const urlRegex = /(https?:\/\/[^\s]+)/g
+  return text.match(urlRegex) || []
+}
+
+export function calculateEngagementRate(tweet: Tweet): number {
+  if (!tweet.public_metrics) return 0
+
+  const { retweet_count, reply_count, like_count, quote_count } = tweet.public_metrics
+  const totalEngagement = retweet_count + reply_count + like_count + quote_count
+
+  return totalEngagement
+}
+
+export function sortTweetsByEngagement(tweets: Tweet[]): Tweet[] {
+  return tweets.sort((a, b) => {
+    const engagementA = calculateEngagementRate(a)
+    const engagementB = calculateEngagementRate(b)
+    return engagementB - engagementA
+  })
+}
+
+export function filterTweetsByDate(tweets: Tweet[], startDate: Date, endDate: Date): Tweet[] {
+  return tweets.filter((tweet) => {
+    const tweetDate = new Date(tweet.created_at)
+    return tweetDate >= startDate && tweetDate <= endDate
+  })
+}
+
+export function groupTweetsByDate(tweets: Tweet[]): Record<string, Tweet[]> {
+  return tweets.reduce(
+    (acc, tweet) => {
+      const date = formatTweetDate(tweet.created_at)
+      if (!acc[date]) {
+        acc[date] = []
       }
-    }
-   
-    return uniqueTweets;
-  }
-   
-  /**
-   * Processes deleted and latest tweets according to business logic
-   */
-  export function processTweets(deletedResult: TweetResponse, latestResult: TweetResponse): TweetResponse {
-    // Extract tweets from both results
-    const deletedTweets = deletedResult.tweets || [];
-    const latestTweets = latestResult.tweets || [];
-   
-    // Filter deleted tweets containing Ethereum addresses
-    const filteredDeleted = filterTweetsWithAddresses(deletedTweets);
-   
-    // Combine both lists and remove duplicates
-    const uniqueTweets = combineTweets(filteredDeleted, latestTweets);
-   
-    // Create the combined result
-    const result: TweetResponse = {
-      tweets: uniqueTweets,
-      count: uniqueTweets.length
-    };
-   
-    // Copy other fields from the original response
-    for (const key in deletedResult) {
-      if (key !== 'tweets' && key !== 'count') {
-        result[key] = deletedResult[key];
-      }
-    }
-   
-    return result;
-  }
+      acc[date].push(tweet)
+      return acc
+    },
+    {} as Record<string, Tweet[]>,
+  )
+}
