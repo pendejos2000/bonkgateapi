@@ -79,7 +79,7 @@ export default function HeroSection() {
       <div className="text-center space-y-8">
         <div className="space-y-4">
           <div className="flex justify-center mb-6">
-            <div className="w-28 h-28 rounded-full border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden bg-black">
+            <div className="w-28 h-28 rounded-full border-4 border-black shadow-[8px_8px_0px_0px_#f0b90b] overflow-hidden bg-black">
               <Image
                 src="/images/fys-logo.png"
                 alt="FourYourSafety FYS Logo"
