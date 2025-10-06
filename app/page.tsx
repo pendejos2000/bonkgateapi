@@ -58,7 +58,7 @@ export default function HomePage() {
                     <div className="flex-1 p-6">
                       <nav className="space-y-4">
                         <a
-                          href="https://docs.bonkgate.fun/"
+                          href="https://docs.fouryoursafety.fun/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl"
@@ -94,7 +94,7 @@ export default function HomePage() {
             <div className="hidden md:flex items-center gap-4">
               <nav className="flex items-center gap-6">
                 <a
-                  href="https://docs.bonkgate.fun/"
+                  href="https://docs.fouryoursafety.fun/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-lg font-bold hover:text-bonk-orange transition-colors"
