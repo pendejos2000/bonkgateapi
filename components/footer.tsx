@@ -53,22 +53,8 @@ const Footer = () => {
                   Roadmap
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("studio")}
-                  className="hover:text-white transition-colors text-left"
-                >
-                  Studio
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("hero")}
-                  className="hover:text-white transition-colors text-left"
-                >
-                  Get Started
-                </button>
-              </li>
+              
+              
             </ul>
           </div>
 
