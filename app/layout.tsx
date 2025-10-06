@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   title: "FourYourSafety",
   description: "The ultimate crypto-Twitter intelligence browser extension",
   icons: {
-    icon: "/bonkgate.png",
-    shortcut: "/bonkgate.png",
-    apple: "/bonkgate.png",
+    icon: "/favicon.jpg",
+    shortcut: "/favicon.jpg",
+    apple: "/favicon.jpg",
   },
   generator: "v0.dev",
 }
