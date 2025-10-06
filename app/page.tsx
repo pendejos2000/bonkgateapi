@@ -15,13 +15,13 @@ export default function HomePage() {
         <header className="sticky top-0 z-50 border-b-4 border-black p-4 sm:p-6 bg-white/40 backdrop-blur-md rounded-t-[22px]">
           <div className="flex justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
+              <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-black flex-shrink-0">
                 <Image
-                  src="/images/bonkgate-logo.png"
-                  alt="FourYourSafety Detective Logo"
+                  src="/images/fys-logo.png"
+                  alt="FourYourSafety Logo"
                   width={40}
                   height={40}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-1"
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight">
@@ -41,13 +41,13 @@ export default function HomePage() {
                   <div className="h-full bg-white/40 backdrop-blur-md flex flex-col">
                     <div className="p-6 border-b-4 border-black">
                       <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-black flex-shrink-0">
                           <Image
-                            src="/images/bonkgate-logo.png"
-                            alt="FourYourSafety Detective Logo"
+                            src="/images/fys-logo.png"
+                            alt="FourYourSafety Logo"
                             width={40}
                             height={40}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain p-1"
                           />
                         </div>
                         <h2 className="text-2xl font-black">
