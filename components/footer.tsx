@@ -1,8 +1,17 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Twitter, Github, MessageCircle } from "lucide-react"
 
 const Footer = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
   return (
     <footer id="footer" className="bg-gray-900 text-white border-t-4 border-black">
       <div className="container mx-auto px-4 py-12">
@@ -13,11 +22,11 @@ const Footer = () => {
               <Image
                 src="/images/fys-hand-logo.jpg"
                 alt="FourYourSafety Logo"
-                width={48}
-                height={48}
-                className="rounded-full border-2 border-[#F0B90B]"
+                width={64}
+                height={64}
+                className="rounded-full border-3 border-[#F0B90B]"
               />
-              <span className="text-xl font-bold text-[#F0B90B]">FYS</span>
+              <span className="text-2xl font-bold text-[#F0B90B]">FYS</span>
             </div>
             <p className="text-gray-400 text-sm">
               Comprehensive social media intelligence and content creation platform for the modern digital age.
@@ -29,24 +38,36 @@ const Footer = () => {
             <h3 className="font-bold text-lg mb-4 text-[#F0B90B]">Product</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#features" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => scrollToSection("features")}
+                  className="hover:text-white transition-colors text-left"
+                >
                   Features
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#roadmap" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => scrollToSection("roadmap")}
+                  className="hover:text-white transition-colors text-left"
+                >
                   Roadmap
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#studio" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => scrollToSection("studio")}
+                  className="hover:text-white transition-colors text-left"
+                >
                   Studio
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-white transition-colors">
-                  Pricing
-                </a>
+                <button
+                  onClick={() => scrollToSection("hero")}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  Get Started
+                </button>
               </li>
             </ul>
           </div>
@@ -71,11 +92,6 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#faq" className="hover:text-white transition-colors">
-                  FAQ
-                </a>
-              </li>
-              <li>
                 <a
                   href="https://github.com/fouryoursafety"
                   target="_blank"
@@ -96,7 +112,7 @@ const Footer = () => {
                 href="https://twitter.com/fouryoursafety"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-800 p-2 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black"
+                className="bg-gray-800 p-3 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
               >
                 <Twitter className="w-5 h-5" />
               </a>
@@ -104,7 +120,7 @@ const Footer = () => {
                 href="https://github.com/fouryoursafety"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-800 p-2 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black"
+                className="bg-gray-800 p-3 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
               >
                 <Github className="w-5 h-5" />
               </a>
@@ -112,7 +128,7 @@ const Footer = () => {
                 href="https://t.me/fouryoursafety"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-800 p-2 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black"
+                className="bg-gray-800 p-3 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
               >
                 <MessageCircle className="w-5 h-5" />
               </a>
@@ -132,9 +148,6 @@ const Footer = () => {
             </a>
             <a href="#terms" className="hover:text-white transition-colors">
               Terms of Service
-            </a>
-            <a href="#cookies" className="hover:text-white transition-colors">
-              Cookie Policy
             </a>
           </div>
         </div>
