@@ -29,7 +29,7 @@ const Footer = () => {
               <span className="text-2xl font-bold text-[#F0B90B]">FYS</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Comprehensive social media intelligence and content creation platform for the modern digital age.
+              Comprehensive crypto-twitter analysis tool for researchers and traders to get insights on projects.       
             </p>
           </div>
 
