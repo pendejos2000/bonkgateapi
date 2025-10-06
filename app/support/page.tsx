@@ -217,7 +217,7 @@ export default function SupportPage() {
                       <p className="text-sm text-gray-600">Detailed guides for all features and capabilities</p>
                     </a>
                     <a
-                      href="https://docs.fouryoursafety.fun/api"
+                      href="https://docs.fouryoursafety.fun/api-integration"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-4 border-2 border-black rounded-xl hover:bg-black/5 transition-colors"
