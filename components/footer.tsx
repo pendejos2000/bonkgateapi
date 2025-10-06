@@ -129,17 +129,3 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">© {new Date().getFullYear()} FourYourSafety. All rights reserved.</p>
           <div className="flex gap-6 text-sm text-gray-400">
-            <a href="#privacy" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#terms" className="hover:text-white transition-colors">
-              Terms of Service
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-export default Footer
