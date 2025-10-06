@@ -254,7 +254,7 @@ export default function HeroSection() {
         <div className="text-center mb-12">
           <p className="text-xl sm:text-2xl text-white drop-shadow-md">
             <span className="text-white font-black bg-black/20 px-3 py-1 rounded-lg border-2 border-white/30">
-              $GATE
+              $FYS
             </span>{" "}
             holders get free access to the extension without any monthly subscription fees.
           </p>

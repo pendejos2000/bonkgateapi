@@ -72,7 +72,7 @@ export default function RoadmapSection() {
               <li className="flex items-start gap-3">
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-base">$GATE Token Integration</h4>
+                  <h4 className="font-bold text-base">$FYS Token Integration</h4>
                   <p className="text-xs text-gray-500">Utility token for subscription-free access.</p>
                 </div>
               </li>
