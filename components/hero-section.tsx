@@ -40,7 +40,7 @@ export default function HeroSection() {
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-full max-w-md animate-slide-in-up">
           <Card className="border-4 border-black rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <div className="flex items-center justify-between p-3 border-b-4 border-black bg-white/80 backdrop-blur-sm">
-              <h3 className="font-bold text-lg">BonkGate Demo</h3>
+              <h3 className="font-bold text-lg">FourYourSafety Demo</h3>
               <div className="flex items-center gap-1">
                 <Button
                   onClick={handleFullscreen}
@@ -64,7 +64,10 @@ export default function HeroSection() {
             </div>
             <div className="bg-black">
               <video ref={videoRef} className="w-full h-auto" controls autoPlay onEnded={closeVideoModal}>
-                <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cursorful-video-1752355234862-8dH7YbbgQn528p6WPH6j0lgbNOuMrJ.mp4" type="video/mp4" />
+                <source
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cursorful-video-1752355234862-8dH7YbbgQn528p6WPH6j0lgbNOuMrJ.mp4"
+                  type="video/mp4"
+                />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -79,7 +82,7 @@ export default function HeroSection() {
             <div className="w-28 h-28 rounded-full border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden bg-white">
               <Image
                 src="/images/bonkgate-logo.png"
-                alt="BonkGate Detective Logo"
+                alt="FourYourSafety Detective Logo"
                 width={112}
                 height={112}
                 className="w-full h-full object-cover"
@@ -87,7 +90,7 @@ export default function HeroSection() {
             </div>
           </div>
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight">
-            BONK<span className="text-bonk-orange">GATE</span>
+            FOUR<span className="text-bonk-orange">YOUR</span>SAFETY
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold max-w-4xl mx-auto">
             The Ultimate Crypto-Twitter Intelligence Browser Extension
@@ -216,14 +219,16 @@ export default function HeroSection() {
               1
             </div>
             <h3 className="text-xl font-bold mb-2">Install Extension</h3>
-            <p className="text-gray-700">Add BonkGate to your browser with one click</p>
+            <p className="text-gray-700">Add FourYourSafety to your browser with one click</p>
           </div>
           <div className="text-center">
             <div className="bg-bonk-orange text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-black mx-auto mb-4 border-4 border-black">
               2
             </div>
             <h3 className="text-xl font-bold mb-2">Browse Twitter</h3>
-            <p className="text-gray-700">Use Twitter normally while BonkGate tracks everything in the background</p>
+            <p className="text-gray-700">
+              Use Twitter normally while FourYourSafety tracks everything in the background
+            </p>
           </div>
           <div className="text-center">
             <div className="bg-bonk-orange text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-black mx-auto mb-4 border-4 border-black">
@@ -361,7 +366,7 @@ export default function HeroSection() {
       <Card className="border-4 border-black rounded-xl p-8 sm:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-gradient-to-br from-bonk-orange to-red-500 text-white text-center">
         <h2 className="text-3xl sm:text-5xl font-black mb-4">Ready to Uncover the Truth?</h2>
         <p className="text-xl sm:text-2xl mb-8 opacity-90">
-          Join our community of traders using BonkGate for crypto Twitter intelligence
+          Join our community of traders using FourYourSafety for crypto Twitter intelligence
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button

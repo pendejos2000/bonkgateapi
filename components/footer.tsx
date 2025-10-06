@@ -14,14 +14,14 @@ export default function Footer() {
               <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                 <Image
                   src="/images/bonkgate-logo.png"
-                  alt="BonkGate Detective Logo"
+                  alt="FourYourSafety Detective Logo"
                   width={48}
                   height={48}
                   className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-2xl font-black">
-                BONK<span className="text-bonk-orange">GATE</span>
+                FOUR<span className="text-bonk-orange">YOUR</span>SAFETY
               </h3>
             </div>
             <p className="text-gray-700">The ultimate crypto-Twitter intelligence browser extension.</p>
@@ -104,7 +104,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t-2 border-black mt-8 pt-8 text-center">
-          <p className="text-gray-700 font-medium">© 2025 BonkGate </p>
+          <p className="text-gray-700 font-medium">© 2025 FourYourSafety </p>
         </div>
       </div>
     </footer>

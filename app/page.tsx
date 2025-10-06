@@ -18,14 +18,14 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                 <Image
                   src="/images/bonkgate-logo.png"
-                  alt="BonkGate Detective Logo"
+                  alt="FourYourSafety Detective Logo"
                   width={40}
                   height={40}
                   className="w-full h-full object-cover"
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight">
-                BONK<span className="text-bonk-orange">GATE</span>
+                FOUR<span className="text-bonk-orange">YOUR</span>SAFETY
               </h1>
             </div>
 
@@ -44,14 +44,14 @@ export default function HomePage() {
                         <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                           <Image
                             src="/images/bonkgate-logo.png"
-                            alt="BonkGate Detective Logo"
+                            alt="FourYourSafety Detective Logo"
                             width={40}
                             height={40}
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <h2 className="text-2xl font-black">
-                          BONK<span className="text-bonk-orange">GATE</span>
+                          FOUR<span className="text-bonk-orange">YOUR</span>SAFETY
                         </h2>
                       </div>
                     </div>

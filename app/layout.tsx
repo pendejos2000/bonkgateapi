@@ -6,14 +6,14 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "BonkGate",
+  title: "FourYourSafety",
   description: "The ultimate crypto-Twitter intelligence browser extension",
   icons: {
     icon: "/bonkgate.png",
     shortcut: "/bonkgate.png",
     apple: "/bonkgate.png",
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
