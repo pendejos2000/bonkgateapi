@@ -60,15 +60,15 @@ export default function SupportPage() {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                   <Image
-                    src="/images/bonkgate-logo.png"
-                    alt="BonkGate Detective Logo"
+                    src="/images/fys-hand-logo.jpg"
+                    alt="FourYourSafety Logo"
                     width={40}
                     height={40}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-                  BONK<span className="text-bonk-orange">GATE</span> SUPPORT
+                  FOUR<span className="text-bonk-orange">YOUR</span>SAFETY SUPPORT
                 </h1>
               </div>
             </div>
@@ -121,15 +121,15 @@ export default function SupportPage() {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                 <Image
-                  src="/images/bonkgate-logo.png"
-                  alt="BonkGate Detective Logo"
+                  src="/images/fys-hand-logo.jpg"
+                  alt="FourYourSafety Logo"
                   width={40}
                   height={40}
                   className="w-full h-full object-cover"
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-                BONK<span className="text-bonk-orange">GATE</span> SUPPORT
+                FOUR<span className="text-bonk-orange">YOUR</span>SAFETY SUPPORT
               </h1>
             </div>
           </div>
@@ -273,7 +273,7 @@ export default function SupportPage() {
                   </div>
                   <div>
                     <h4 className="font-bold">Extension Not Working?</h4>
-                    <p className="text-sm text-gray-600">Check if BonkGate is enabled in your extensions</p>
+                    <p className="text-sm text-gray-600">Check if FourYourSafety is enabled in your extensions</p>
                   </div>
                   <div>
                     <h4 className="font-bold">Missing Data?</h4>
