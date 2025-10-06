@@ -87,7 +87,7 @@ export default function RoadmapSection() {
               <li className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-gray-600">Free access to $GATE Holders</h4>
+                  <h4 className="font-bold text-gray-600">Free access to $FYS Holders</h4>
                   <p className="text-xs text-gray-500">Token holders get premium access without subscriptions.</p>
                 </div>
               </li>
