@@ -11,13 +11,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden bg-black flex-shrink-0">
+              <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                 <Image
-                  src="/images/fys-logo.png"
-                  alt="FourYourSafety Logo"
+                  src="/images/bonkgate-logo.png"
+                  alt="FourYourSafety Detective Logo"
                   width={48}
                   height={48}
-                  className="w-full h-full object-contain p-1"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-2xl font-black">

@@ -82,7 +82,7 @@ export default function HeroSection() {
             <div className="w-28 h-28 rounded-full border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden bg-black">
               <Image
                 src="/images/fys-logo.png"
-                alt="FourYourSafety Logo"
+                alt="FourYourSafety FYS Logo"
                 width={112}
                 height={112}
                 className="w-full h-full object-contain p-2"
