@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,6 +17,7 @@ import {
   User,
   AlertCircle,
   MessageCircle,
+  Clock,
 } from "lucide-react"
 import Link from "next/link"
 import { submitSupportTicket } from "./actions"
@@ -186,17 +188,27 @@ export default function SupportPage() {
                       </div>
                     )}
                     {state?.success === false && (
-                      <div className="p-4 bg-red-100 border-2 border-black rounded-xl">
+                      <div className="p-4 bg-red-100 border-2 border-black rounded-xl flex items-start gap-3">
+                        <Clock className="h-5 w-5 text-red-800 flex-shrink-0 mt-0.5" />
                         <p className="font-bold text-red-800">
                           {state.error || "Failed to submit ticket. Please try again."}
                         </p>
                       </div>
                     )}
 
+                    <div className="p-3 bg-yellow-50 border-2 border-black rounded-xl">
+                      <p className="text-sm text-gray-700 flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>
+                          <strong>Rate Limit:</strong> You can submit 1 support ticket every 15 minutes.
+                        </span>
+                      </p>
+                    </div>
+
                     <Button
                       type="submit"
                       disabled={isPending}
-                      className="w-full bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold text-xl py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-2px] transition-transform"
+                      className="w-full bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold text-xl py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-2px] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isPending ? (
                         "Submitting..."
