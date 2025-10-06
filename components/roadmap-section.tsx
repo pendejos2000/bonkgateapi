@@ -52,7 +52,7 @@ export default function RoadmapSection() {
           <TabsContent value="phase1" className="p-6 mt-0">
             <h3 className="text-xl font-bold mb-2">Foundation & Launch</h3>
             <p className="text-gray-600 mb-4 text-sm">
-              This phase focuses on building the core infrastructure and launching the essential features of BonkGate.
+              This phase focuses on building the core infrastructure and launching the essential features of FourYourSafety.
             </p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
