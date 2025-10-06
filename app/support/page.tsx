@@ -142,7 +142,7 @@ export default function SupportPage() {
               <div className="mb-6">
                 <h2 className="text-3xl sm:text-4xl font-black mb-2">Get Help</h2>
                 <p className="text-lg text-gray-700">
-                  Having issues with BonkGate? Our support team is here to help you get back on track.
+                  Having issues with FourYourSafety? Our support team is here to help you get back on track.
                 </p>
               </div>
 
