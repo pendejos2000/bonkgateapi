@@ -26,7 +26,7 @@ const Footer = () => {
                 height={64}
                 className="rounded-full border-3 border-[#F0B90B]"
               />
-              <span className="text-2xl font-bold text-[#F0B90B]">FYS</span>
+              <span className="text-2xl font-bold text-[#F0B90B]">$FYS</span>
             </div>
             <p className="text-gray-400 text-sm">
               Comprehensive crypto-twitter analysis tool for researchers and traders to get insights on projects.       
