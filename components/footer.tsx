@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Twitter, Github, MessageCircle } from "lucide-react"
 
-const Footer = () => {
+export default function Footer() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -29,7 +29,7 @@ const Footer = () => {
               <span className="text-2xl font-bold text-[#F0B90B]">$FYS</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Comprehensive crypto-twitter analysis tool for researchers and traders to get insights on projects.       
+              Comprehensive crypto-twitter analysis tool for researchers and traders to get insights on projects.
             </p>
           </div>
 
@@ -53,8 +53,6 @@ const Footer = () => {
                   Roadmap
                 </button>
               </li>
-              
-              
             </ul>
           </div>
 
@@ -129,3 +127,18 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">© {new Date().getFullYear()} FourYourSafety. All rights reserved.</p>
           <div className="flex gap-6 text-sm text-gray-400">
+            <a href="#privacy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#terms" className="hover:text-white transition-colors">
+              Terms of Service
+            </a>
+            <a href="#cookies" className="hover:text-white transition-colors">
+              Cookie Policy
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
