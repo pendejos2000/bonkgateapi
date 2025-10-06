@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Menu, Globe, TrendingUp, Terminal } from "lucide-react"
+import { Menu, Globe, TrendingUp } from "lucide-react"
 import HeroSection from "@/components/hero-section"
 import Footer from "@/components/footer"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -8,32 +8,24 @@ import Link from "next/link"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-cyber-dark text-cyber-green relative overflow-hidden">
-      {/* Matrix background effect */}
-      <div className="fixed inset-0 matrix-bg opacity-30 pointer-events-none" />
-
-      {/* Scan lines effect */}
-      <div className="fixed inset-0 scan-lines pointer-events-none" />
-
-      {/* Main container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-2 sm:p-4">
+      {/* Centered Glassmorphic container */}
+      <div className="w-full max-w-7xl mx-auto backdrop-blur-xl bg-white/30 border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         {/* Header */}
-        <header className="sticky top-0 z-50 border-b-2 border-cyber-red bg-cyber-dark/95 backdrop-blur-md p-4 sm:p-6 terminal-border">
+        <header className="sticky top-0 z-50 border-b-4 border-black p-4 sm:p-6 bg-white/40 backdrop-blur-md rounded-t-[22px]">
           <div className="flex justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 border-2 border-cyber-red overflow-hidden bg-cyber-dark flex-shrink-0 terminal-glow">
+              <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
                 <Image
                   src="/images/bonkgate-logo.png"
                   alt="BonkGate Detective Logo"
                   width={40}
                   height={40}
-                  className="w-full h-full object-cover filter brightness-0 invert"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight font-mono terminal-glow">
-                <span className="text-cyber-green">[</span>
-                BONK<span className="text-cyber-red">GATE</span>
-                <span className="text-cyber-green">]</span>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight">
+                BONK<span className="text-bonk-orange">GATE</span>
               </h1>
             </div>
 
@@ -41,56 +33,55 @@ export default function HomePage() {
             <div className="flex md:hidden">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="border-2 border-cyber-red bg-cyber-dark text-cyber-red hover:bg-cyber-red hover:text-cyber-dark terminal-glow"
-                  >
+                  <Button variant="outline" size="icon" className="rounded-xl border-2 border-black bg-transparent">
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="border-l-2 border-cyber-red bg-cyber-dark p-0">
-                  <div className="h-full bg-cyber-dark flex flex-col">
-                    <div className="p-6 border-b-2 border-cyber-red">
+                <SheetContent side="right" className="border-l-4 border-black p-0">
+                  <div className="h-full bg-white/40 backdrop-blur-md flex flex-col">
+                    <div className="p-6 border-b-4 border-black">
                       <div className="flex items-center gap-2">
-                        <Terminal className="w-8 h-8 text-cyber-red terminal-glow" />
-                        <h2 className="text-2xl font-black font-mono terminal-glow">
-                          <span className="text-cyber-green">[</span>
-                          BONK<span className="text-cyber-red">GATE</span>
-                          <span className="text-cyber-green">]</span>
+                        <div className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white flex-shrink-0">
+                          <Image
+                            src="/images/bonkgate-logo.png"
+                            alt="BonkGate Detective Logo"
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h2 className="text-2xl font-black">
+                          BONK<span className="text-bonk-orange">GATE</span>
                         </h2>
                       </div>
                     </div>
                     <div className="flex-1 p-6">
-                      <nav className="space-y-4 font-mono">
+                      <nav className="space-y-4">
                         <a
                           href="https://docs.bonkgate.fun/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block text-lg font-bold p-3 hover:bg-cyber-red/20 border border-transparent hover:border-cyber-red text-cyber-green hover:text-cyber-red transition-all"
+                          className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl"
                         >
-                          &gt; DOCUMENTATION
+                          Documentation
                         </a>
-                        <Link
-                          href="/support"
-                          className="block text-lg font-bold p-3 hover:bg-cyber-red/20 border border-transparent hover:border-cyber-red text-cyber-green hover:text-cyber-red transition-all"
-                        >
-                          &gt; SUPPORT
+                        <Link href="/support" className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl">
+                          Support
                         </Link>
                         <a
                           href="https://letsbonk.fun/token/3gy2xMouoB4awZKZeB8Cgwa3Gco2jh5BPmyDBKdWbonk"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block text-lg font-bold p-3 hover:bg-cyber-red/20 border border-transparent hover:border-cyber-red text-cyber-green hover:text-cyber-red transition-all"
+                          className="block text-lg font-bold p-3 hover:bg-black/10 rounded-xl"
                         >
-                          &gt; TRADE $GATE
+                          Trade $GATE
                         </a>
                       </nav>
                     </div>
-                    <div className="p-6 border-t-2 border-cyber-red">
+                    <div className="p-6 border-t-4 border-black">
                       <Button
                         asChild
-                        className="w-full bg-cyber-red hover:bg-cyber-red/80 text-cyber-dark font-bold font-mono border-2 border-cyber-red terminal-glow"
+                        className="w-full bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold"
                       >
                         <a
                           href="https://github.com/BonkGate-Labs/BonkGate-Extension"
@@ -98,7 +89,7 @@ export default function HomePage() {
                           rel="noopener noreferrer"
                         >
                           <Globe className="mr-2 h-4 w-4" />
-                          [INSTALL_EXTENSION]
+                          Add to Browser
                         </a>
                       </Button>
                     </div>
@@ -109,26 +100,24 @@ export default function HomePage() {
 
             {/* Desktop navigation */}
             <div className="hidden md:flex items-center gap-4">
-              <nav className="flex items-center gap-6 font-mono">
+              <nav className="flex items-center gap-6">
                 <a
                   href="https://docs.bonkgate.fun/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg font-bold hover:text-cyber-red transition-colors terminal-glow"
+                  className="text-lg font-bold hover:text-bonk-orange transition-colors"
                 >
-                  &gt; DOCS
+                  Documentation
                 </a>
-                <Link
-                  href="/support"
-                  className="text-lg font-bold hover:text-cyber-red transition-colors terminal-glow"
-                >
-                  &gt; SUPPORT
+                <Link href="/support" className="text-lg font-bold hover:text-bonk-orange transition-colors">
+                  Support
                 </Link>
               </nav>
               <div className="flex items-center gap-3">
                 <Button
                   asChild
-                  className="bg-cyber-green hover:bg-cyber-green/80 text-cyber-dark font-bold font-mono border-2 border-cyber-green terminal-glow"
+                  variant="outline"
+                  className="bg-green-500 hover:bg-green-600 text-white border-2 border-black rounded-xl font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 >
                   <a
                     href="https://letsbonk.fun/token/3gy2xMouoB4awZKZeB8Cgwa3Gco2jh5BPmyDBKdWbonk"
@@ -136,12 +125,12 @@ export default function HomePage() {
                     rel="noopener noreferrer"
                   >
                     <TrendingUp className="mr-2 h-4 w-4" />
-                    [TRADE_$GATE]
+                    Trade $GATE
                   </a>
                 </Button>
                 <Button
                   asChild
-                  className="bg-cyber-red hover:bg-cyber-red/80 text-cyber-dark font-bold font-mono border-2 border-cyber-red terminal-glow"
+                  className="bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 >
                   <a
                     href="https://github.com/BonkGate-Labs/BonkGate-Extension"
@@ -149,7 +138,7 @@ export default function HomePage() {
                     rel="noopener noreferrer"
                   >
                     <Globe className="mr-2 h-4 w-4" />
-                    [INSTALL_EXTENSION]
+                    Add to Browser
                   </a>
                 </Button>
               </div>

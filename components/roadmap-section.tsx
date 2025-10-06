@@ -5,30 +5,26 @@ import { CheckCircle, Clock } from "lucide-react"
 
 export default function RoadmapSection() {
   return (
-    <div id="roadmap" className="space-y-8 font-mono">
-      <h2 className="text-3xl sm:text-5xl font-black text-center text-cyber-red terminal-glow">
-        [DEVELOPMENT_ROADMAP]
-      </h2>
+    <div id="roadmap" className="space-y-8">
+      <h2 className="text-3xl sm:text-5xl font-black text-center">Roadmap</h2>
 
       {/* Blobs and Connecting Line */}
       <div className="flex justify-center items-center gap-2 sm:gap-4">
         {/* Pulsating Blob 1 */}
         <div className="relative flex items-center justify-center">
-          <div className="absolute w-20 h-20 sm:w-24 sm:h-24 border-2 border-cyber-red bg-cyber-red/20 animate-pulse" />
-          <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-cyber-red via-red-600 to-red-800 flex items-center justify-center text-white font-black text-4xl sm:text-5xl border-2 border-cyber-red terminal-glow">
-            01
+          <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-bonk-orange animate-pulse-wave" />
+          <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-bonk-orange via-orange-400 to-red-500 flex items-center justify-center text-white font-black text-4xl sm:text-5xl border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            1
           </div>
         </div>
 
         {/* Connecting Line */}
-        <div className="w-16 sm:w-24 h-1 bg-cyber-red/50 relative">
-          <div className="absolute inset-0 bg-cyber-red animate-pulse"></div>
-        </div>
+        <div className="w-16 sm:w-24 h-1 bg-black/20 rounded-full" />
 
         {/* Static Blob 2 */}
         <div className="relative flex items-center justify-center">
-          <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center text-white font-black text-4xl sm:text-5xl border-2 border-gray-600">
-            02
+          <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-black text-4xl sm:text-5xl border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            2
           </div>
         </div>
       </div>
@@ -38,95 +34,82 @@ export default function RoadmapSection() {
         <TabsList className="grid w-full grid-cols-2 p-0 bg-transparent h-auto gap-2">
           <TabsTrigger
             value="phase1"
-            className="flex-1 data-[state=active]:bg-cyber-dark data-[state=active]:text-cyber-red data-[state=active]:border-cyber-red border-2 border-gray-600 p-3 font-bold text-lg relative data-[state=inactive]:bg-cyber-dark data-[state=inactive]:text-cyber-green font-mono terminal-glow"
+            className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-none data-[state=active]:border-b-white -mb-[4px] z-10 border-4 border-black rounded-t-xl p-3 font-bold text-lg relative data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-gray-500"
           >
-            <div className="absolute top-1.5 right-1.5 bg-cyber-green text-cyber-dark text-[10px] font-bold px-1.5 py-0.5 border border-cyber-green font-mono">
-              ACTIVE
+            <div className="absolute top-1.5 right-1.5 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] border border-black">
+              CURRENT
             </div>
-            [PHASE_01]
+            Phase 1
           </TabsTrigger>
           <TabsTrigger
             value="phase2"
-            className="flex-1 data-[state=active]:bg-cyber-dark data-[state=active]:text-cyber-red data-[state=active]:border-cyber-red border-2 border-gray-600 p-3 font-bold text-lg relative data-[state=inactive]:bg-cyber-dark data-[state=inactive]:text-cyber-green font-mono terminal-glow"
+            className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-none data-[state=active]:border-b-white -mb-[4px] z-10 border-4 border-black rounded-t-xl p-3 font-bold text-lg relative data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-gray-500"
           >
-            [PHASE_02]
+            Phase 2
           </TabsTrigger>
         </TabsList>
-        <div className="border-2 border-cyber-red bg-cyber-dark terminal-glow">
+        <div className="border-4 border-black rounded-xl rounded-t-none bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <TabsContent value="phase1" className="p-6 mt-0">
-            <h3 className="text-xl font-bold mb-2 text-cyber-red font-mono terminal-glow">[FOUNDATION_&_LAUNCH]</h3>
-            <p className="text-cyber-green mb-4 text-sm font-mono">
-              {">"} This phase focuses on building the core infrastructure and launching the essential features of
-              BonkGate.
+            <h3 className="text-xl font-bold mb-2">Foundation & Launch</h3>
+            <p className="text-gray-600 mb-4 text-sm">
+              This phase focuses on building the core infrastructure and launching the essential features of BonkGate.
             </p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-cyber-green flex-shrink-0 mt-0.5 terminal-glow" />
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-base text-cyber-red font-mono">[CORE_EXTENSION_LAUNCH]</h4>
-                  <p className="text-xs text-cyber-green font-mono">{">"} Initial release on the Chrome Web Store.</p>
+                  <h4 className="font-bold text-base">Core Extension Launch</h4>
+                  <p className="text-xs text-gray-500">Initial release on the Chrome Web Store.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-cyber-green flex-shrink-0 mt-0.5 terminal-glow" />
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-base text-cyber-red font-mono">[DELETED_CONTENT_TRACKING]</h4>
-                  <p className="text-xs text-cyber-green font-mono">{">"} Real-time monitoring of tweets and CAs.</p>
+                  <h4 className="font-bold text-base">Deleted Content Tracking</h4>
+                  <p className="text-xs text-gray-500">Real-time monitoring of tweets and CAs.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-cyber-green flex-shrink-0 mt-0.5 terminal-glow" />
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-base text-cyber-red font-mono">[$GATE_TOKEN_INTEGRATION]</h4>
-                  <p className="text-xs text-cyber-green font-mono">
-                    {">"} Utility token for subscription-free access.
-                  </p>
+                  <h4 className="font-bold text-base">$GATE Token Integration</h4>
+                  <p className="text-xs text-gray-500">Utility token for subscription-free access.</p>
                 </div>
               </li>
             </ul>
           </TabsContent>
           <TabsContent value="phase2" className="p-6 mt-0">
-            <h3 className="text-xl font-bold mb-2 text-cyber-red font-mono terminal-glow">
-              [EXPANSION_&_ECOSYSTEM_GROWTH]
-            </h3>
-            <p className="text-cyber-green mb-4 text-sm font-mono">
-              {">"} This phase will expand capabilities, introduce governance, and build a robust ecosystem.
+            <h3 className="text-xl font-bold mb-2">Expansion & Ecosystem Growth</h3>
+            <p className="text-gray-600 mb-4 text-sm">
+              This phase will expand capabilities, introduce governance, and build a robust ecosystem.
             </p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[FREE_ACCESS_TO_$GATE_HOLDERS]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} Token holders get premium access without subscriptions.
-                  </p>
+                  <h4 className="font-bold text-gray-600">Free access to $GATE Holders</h4>
+                  <p className="text-xs text-gray-500">Token holders get premium access without subscriptions.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[API_ACCESS]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} Public API for developers and third-party integrations.
-                  </p>
+                  <h4 className="font-bold text-gray-600">API Access</h4>
+                  <p className="text-xs text-gray-500">Public API for developers and third-party integrations.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[COMMUNITY_GOVERNANCE]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} DAO voting system for feature development decisions.
-                  </p>
+                  <h4 className="font-bold text-gray-600">Community Governance</h4>
+                  <p className="text-xs text-gray-500">DAO voting system for feature development decisions.</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-gray-400 font-mono">[PRIVATE_COMMUNITY]</h4>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {">"} Exclusive access to private channels and discussions.
-                  </p>
+                  <h4 className="font-bold text-gray-600">Private Community</h4>
+                  <p className="text-xs text-gray-500">Exclusive access to private channels and discussions.</p>
                 </div>
               </li>
             </ul>

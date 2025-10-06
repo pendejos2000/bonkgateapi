@@ -7,13 +7,13 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "BonkGate",
-  description: "The Ultimate Crypto-Twitter Intelligence Browser Extension",
+  description: "The ultimate crypto-Twitter intelligence browser extension",
   icons: {
     icon: "/bonkgate.png",
     shortcut: "/bonkgate.png",
     apple: "/bonkgate.png",
   },
-    generator: 'v0.app'
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({

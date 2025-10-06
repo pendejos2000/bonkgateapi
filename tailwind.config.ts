@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
 
-const config: Config = {
+const config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -53,11 +53,9 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "cyber-red": "#ff0040",
-        "cyber-green": "#00ff41",
-        "cyber-dark": "#0a0a0a",
-        "cyber-darker": "#050505",
-        "cyber-gray": "#1a1a1a",
+        bonk: {
+          orange: "#f0b90b",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -73,33 +71,20 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "terminal-blink": {
-          "0%, 50%": { opacity: "1" },
-          "51%, 100%": { opacity: "0" },
+        "slide-in-up": {
+          from: { transform: "translateY(100%)", opacity: "0" },
+          to: { transform: "translateY(0)", opacity: "1" },
         },
-        "pulse-red": {
-          "0%, 100%": {
-            boxShadow: "0 0 5px #ff0040, 0 0 10px #ff0040, 0 0 15px #ff0040",
-          },
-          "50%": {
-            boxShadow: "0 0 10px #ff0040, 0 0 20px #ff0040, 0 0 30px #ff0040",
-          },
-        },
-        glitch: {
-          "0%": { transform: "translate(0)" },
-          "20%": { transform: "translate(-2px, 2px)" },
-          "40%": { transform: "translate(-2px, -2px)" },
-          "60%": { transform: "translate(2px, 2px)" },
-          "80%": { transform: "translate(2px, -2px)" },
-          "100%": { transform: "translate(0)" },
+        "pulse-wave": {
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "100%": { transform: "scale(2)", opacity: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "terminal-blink": "terminal-blink 1s step-end infinite",
-        "pulse-red": "pulse-red 2s ease-in-out infinite",
-        glitch: "glitch 0.3s ease-in-out infinite",
+        "slide-in-up": "slide-in-up 0.3s ease-out",
+        "pulse-wave": "pulse-wave 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },
