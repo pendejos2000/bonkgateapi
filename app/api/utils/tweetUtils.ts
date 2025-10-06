@@ -1,87 +1,66 @@
-export interface Tweet {
+interface Tweet {
   id: string
   text: string
   created_at: string
-  author_id?: string
-  public_metrics?: {
-    retweet_count: number
-    reply_count: number
-    like_count: number
-    quote_count: number
+  user: {
+    id: string
+    username: string
+    name: string
   }
 }
 
-export interface TweetResponse {
-  data: Tweet[]
-  meta?: {
-    result_count: number
-    next_token?: string
+export function formatTweet(tweet: any): Tweet {
+  return {
+    id: tweet.id || tweet.tweet_id || "",
+    text: tweet.text || tweet.full_text || "",
+    created_at: tweet.created_at || new Date().toISOString(),
+    user: {
+      id: tweet.user?.id || tweet.user_id || "",
+      username: tweet.user?.username || tweet.username || "",
+      name: tweet.user?.name || tweet.name || "",
+    },
   }
 }
 
-export function formatTweetDate(dateString: string): string {
-  const date = new Date(dateString)
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+export function formatTweets(tweets: any[]): Tweet[] {
+  if (!Array.isArray(tweets)) return []
+  return tweets.map(formatTweet)
+}
+
+export function filterDeletedTweets(tweets: any[]): any[] {
+  if (!Array.isArray(tweets)) return []
+  return tweets.filter((tweet) => tweet.is_deleted || tweet.deleted)
+}
+
+export function sortTweetsByDate(tweets: any[], ascending = false): any[] {
+  if (!Array.isArray(tweets)) return []
+
+  return [...tweets].sort((a, b) => {
+    const dateA = new Date(a.created_at).getTime()
+    const dateB = new Date(b.created_at).getTime()
+    return ascending ? dateA - dateB : dateB - dateA
   })
 }
 
-export function formatTweetText(text: string, maxLength = 280): string {
-  if (text.length <= maxLength) return text
-  return text.substring(0, maxLength - 3) + "..."
-}
-
 export function extractHashtags(text: string): string[] {
-  const hashtagRegex = /#[\w]+/g
-  return text.match(hashtagRegex) || []
+  const hashtagRegex = /#(\w+)/g
+  const matches = text.match(hashtagRegex)
+  return matches ? matches.map((tag) => tag.slice(1)) : []
 }
 
 export function extractMentions(text: string): string[] {
-  const mentionRegex = /@[\w]+/g
-  return text.match(mentionRegex) || []
+  const mentionRegex = /@(\w+)/g
+  const matches = text.match(mentionRegex)
+  return matches ? matches.map((mention) => mention.slice(1)) : []
 }
 
 export function extractUrls(text: string): string[] {
   const urlRegex = /(https?:\/\/[^\s]+)/g
-  return text.match(urlRegex) || []
+  const matches = text.match(urlRegex)
+  return matches || []
 }
 
-export function calculateEngagementRate(tweet: Tweet): number {
-  if (!tweet.public_metrics) return 0
-
-  const { retweet_count, reply_count, like_count, quote_count } = tweet.public_metrics
-  const totalEngagement = retweet_count + reply_count + like_count + quote_count
-
-  return totalEngagement
-}
-
-export function sortTweetsByEngagement(tweets: Tweet[]): Tweet[] {
-  return tweets.sort((a, b) => {
-    const engagementA = calculateEngagementRate(a)
-    const engagementB = calculateEngagementRate(b)
-    return engagementB - engagementA
-  })
-}
-
-export function filterTweetsByDate(tweets: Tweet[], startDate: Date, endDate: Date): Tweet[] {
-  return tweets.filter((tweet) => {
-    const tweetDate = new Date(tweet.created_at)
-    return tweetDate >= startDate && tweetDate <= endDate
-  })
-}
-
-export function groupTweetsByDate(tweets: Tweet[]): Record<string, Tweet[]> {
-  return tweets.reduce(
-    (acc, tweet) => {
-      const date = formatTweetDate(tweet.created_at)
-      if (!acc[date]) {
-        acc[date] = []
-      }
-      acc[date].push(tweet)
-      return acc
-    },
-    {} as Record<string, Tweet[]>,
-  )
+export function truncateTweet(text: string, maxLength = 280): string {
+  if (text.length <= maxLength) return text
+  return text.slice(0, maxLength - 3) + "..."
 }
