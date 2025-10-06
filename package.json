@@ -9,6 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "latest",
+    "@fortawesome/free-solid-svg-icons": "latest",
+    "@fortawesome/react-fontawesome": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
@@ -48,6 +51,7 @@
     "next": "15.2.4",
     "next-themes": "latest",
     "react": "^19",
+    "react-bootstrap": "latest",
     "react-day-picker": "latest",
     "react-dom": "^19",
     "react-hook-form": "latest",
