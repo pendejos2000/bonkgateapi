@@ -196,15 +196,6 @@ export default function SupportPage() {
                       </div>
                     )}
 
-                    <div className="p-3 bg-yellow-50 border-2 border-black rounded-xl">
-                      <p className="text-sm text-gray-700 flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        <span>
-                          <strong>Rate Limit:</strong> You can submit 1 support ticket every 15 minutes.
-                        </span>
-                      </p>
-                    </div>
-
                     <Button
                       type="submit"
                       disabled={isPending}
