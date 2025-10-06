@@ -1,60 +1,122 @@
-import { NextResponse } from "next/server"
-import { TotoApi } from "../utils/totoApi"
+import { type NextRequest, NextResponse } from "next/server"
+import { TotoApi } from "../../utils/totoApi"
 
-export const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers":
-    "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
-  "Access-Control-Allow-Credentials": "true",
-  "Access-Control-Max-Age": "86400",
+interface Follower {
+  id: string
+  username: string
+  name: string
+  followers_count?: number
+  following_count?: number
+  tweet_count?: number
+}
+
+function calculateFollowerScore(follower: Follower): number {
+  const followersWeight = 0.4
+  const followingWeight = 0.2
+  const tweetsWeight = 0.4
+
+  const followersScore = (follower.followers_count || 0) * followersWeight
+  const followingScore = (follower.following_count || 0) * followingWeight
+  const tweetsScore = (follower.tweet_count || 0) * tweetsWeight
+
+  return followersScore + followingScore + tweetsScore
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams
+    const username = searchParams.get("username")
+    const limit = Number.parseInt(searchParams.get("limit") || "10")
+
+    if (!username) {
+      return NextResponse.json({ error: "Username parameter is required" }, { status: 400 })
+    }
+
+    const api = new TotoApi()
+    const followers = await api.fetchFollowers(username)
+
+    if (!followers || followers.length === 0) {
+      return NextResponse.json({ error: "No followers found" }, { status: 404 })
+    }
+
+    const scoredFollowers = followers.map((follower: Follower) => ({
+      ...follower,
+      score: calculateFollowerScore(follower),
+    }))
+
+    scoredFollowers.sort((a: any, b: any) => b.score - a.score)
+
+    const topFollowers = scoredFollowers.slice(0, limit)
+
+    return NextResponse.json(
+      { scoredFollowers: topFollowers },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      },
+    )
+  } catch (error) {
+    console.error("Error in get_scored_followers:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { username, limit = 10 } = body
+
+    if (!username) {
+      return NextResponse.json({ error: "Username is required" }, { status: 400 })
+    }
+
+    const api = new TotoApi()
+    const followers = await api.fetchFollowers(username)
+
+    if (!followers || followers.length === 0) {
+      return NextResponse.json({ error: "No followers found" }, { status: 404 })
+    }
+
+    const scoredFollowers = followers.map((follower: Follower) => ({
+      ...follower,
+      score: calculateFollowerScore(follower),
+    }))
+
+    scoredFollowers.sort((a: any, b: any) => b.score - a.score)
+
+    const topFollowers = scoredFollowers.slice(0, limit)
+
+    return NextResponse.json(
+      { scoredFollowers: topFollowers },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      },
+    )
+  } catch (error) {
+    console.error("Error in get_scored_followers POST:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  }
 }
 
 export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders })
-}
-
-export async function GET(request: Request, context: { params: { username: string } }) {
-  try {
-    const username = context?.params?.username
-    if (!username) {
-      return NextResponse.json({ error: "username parameter is required" }, { status: 400, headers: corsHeaders })
-    }
-
-    const url = new URL(request.url)
-    const search = url.searchParams
-    const query: Record<string, string | Array<string>> = {}
-    const keys = Array.from(new Set(Array.from(search.keys())))
-    for (const key of keys) {
-      const all = search.getAll(key)
-      query[key] = all.length > 1 ? all : all[0]
-    }
-
-    const api = new TotoApi()
-    const data = await api.getScoredFollowers(username, query)
-
-    return NextResponse.json(data, { headers: corsHeaders })
-  } catch (error) {
-    console.error("Error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: corsHeaders })
-  }
-}
-
-export async function POST(request: Request) {
-  try {
-    const body = await request.json()
-    const { username, ...query } = body
-
-    if (!username) {
-      return NextResponse.json({ error: "username is required" }, { status: 400, headers: corsHeaders })
-    }
-
-    const api = new TotoApi()
-    const data = await api.getScoredFollowers(username, query)
-
-    return NextResponse.json(data, { headers: corsHeaders })
-  } catch (error) {
-    console.error("Error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: corsHeaders })
-  }
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    },
+  )
 }

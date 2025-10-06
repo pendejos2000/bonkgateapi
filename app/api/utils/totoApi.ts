@@ -5,97 +5,54 @@ export class TotoApi {
     this.baseUrl = process.env.TOTO_API_URL || "https://api.toto.com"
   }
 
-  async getBnbTokenInfo(contractAddress: string, query: Record<string, any> = {}) {
+  async fetchUserData(username: string) {
     try {
-      const queryString = new URLSearchParams(
-        Object.entries(query).reduce((acc, [key, value]) => {
-          if (Array.isArray(value)) {
-            value.forEach((v) => acc.append(key, String(v)))
-          } else {
-            acc.append(key, String(value))
-          }
-          return acc
-        }, new URLSearchParams()),
-      ).toString()
-
-      const url = `${this.baseUrl}/bnb/token/info/${contractAddress}${queryString ? `?${queryString}` : ""}`
-
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(`${this.baseUrl}/user/${username}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
 
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
+        throw new Error(`API error: ${response.status}`)
       }
 
       return await response.json()
     } catch (error) {
-      console.error("Error fetching BNB token info:", error)
+      console.error("Error fetching user data:", error)
       throw error
     }
   }
 
-  async getFirstFollower(username: string) {
+  async fetchFollowers(username: string) {
     try {
-      const url = `${this.baseUrl}/graph/first_follower/${username}`
-
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(`${this.baseUrl}/followers/${username}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
 
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
+        throw new Error(`API error: ${response.status}`)
       }
 
       return await response.json()
     } catch (error) {
-      console.error("Error fetching first follower:", error)
+      console.error("Error fetching followers:", error)
       throw error
     }
   }
 
-  async getScoredFollowers(username: string, query: Record<string, any> = {}) {
+  async fetchBioHistory(username: string) {
     try {
-      const queryString = new URLSearchParams(query as any).toString()
-      const url = `${this.baseUrl}/graph/scored_followers/${username}${queryString ? `?${queryString}` : ""}`
-
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(`${this.baseUrl}/bio-history/${username}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
 
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error("Error fetching scored followers:", error)
-      throw error
-    }
-  }
-
-  async getBioHistory(username: string) {
-    try {
-      const url = `${this.baseUrl}/metadata/bio_history/${username}`
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
+        throw new Error(`API error: ${response.status}`)
       }
 
       return await response.json()
@@ -105,19 +62,16 @@ export class TotoApi {
     }
   }
 
-  async getDeletedTweets(username: string) {
+  async fetchDeletedTweets(username: string) {
     try {
-      const url = `${this.baseUrl}/metadata/deleted_tweets/${username}`
-
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(`${this.baseUrl}/deleted-tweets/${username}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
 
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
+        throw new Error(`API error: ${response.status}`)
       }
 
       return await response.json()
@@ -127,24 +81,40 @@ export class TotoApi {
     }
   }
 
-  async getPastUsernames(username: string) {
+  async fetchPastUsernames(username: string) {
     try {
-      const url = `${this.baseUrl}/metadata/past_usernames/${username}`
-
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(`${this.baseUrl}/past-usernames/${username}`, {
         headers: {
           "Content-Type": "application/json",
         },
       })
 
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
+        throw new Error(`API error: ${response.status}`)
       }
 
       return await response.json()
     } catch (error) {
       console.error("Error fetching past usernames:", error)
+      throw error
+    }
+  }
+
+  async fetchTokenInfo(contractAddress: string) {
+    try {
+      const response = await fetch(`${this.baseUrl}/token/${contractAddress}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`)
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error("Error fetching token info:", error)
       throw error
     }
   }

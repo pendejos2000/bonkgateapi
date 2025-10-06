@@ -1,51 +1,74 @@
-import { NextResponse } from "next/server"
-import { TotoApi } from "../utils/totoApi"
+import { type NextRequest, NextResponse } from "next/server"
+import { TotoApi } from "../../utils/totoApi"
 
-export const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers":
-    "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
-  "Access-Control-Allow-Credentials": "true",
-  "Access-Control-Max-Age": "86400",
-}
-
-export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders })
-}
-
-export async function GET(request: Request, context: { params: { username: string } }) {
+export async function GET(request: NextRequest) {
   try {
-    const username = context?.params?.username
+    const searchParams = request.nextUrl.searchParams
+    const username = searchParams.get("username")
+
     if (!username) {
-      return NextResponse.json({ error: "username parameter is required" }, { status: 400, headers: corsHeaders })
+      return NextResponse.json({ error: "Username parameter is required" }, { status: 400 })
     }
 
     const api = new TotoApi()
-    const data = await api.getPastUsernames(username)
+    const pastUsernames = await api.fetchPastUsernames(username)
 
-    return NextResponse.json(data, { headers: corsHeaders })
+    return NextResponse.json(
+      { pastUsernames },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      },
+    )
   } catch (error) {
-    console.error("Error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: corsHeaders })
+    console.error("Error in get_past_usernames:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { username } = body
 
     if (!username) {
-      return NextResponse.json({ error: "username is required" }, { status: 400, headers: corsHeaders })
+      return NextResponse.json({ error: "Username is required" }, { status: 400 })
     }
 
     const api = new TotoApi()
-    const data = await api.getPastUsernames(username)
+    const pastUsernames = await api.fetchPastUsernames(username)
 
-    return NextResponse.json(data, { headers: corsHeaders })
+    return NextResponse.json(
+      { pastUsernames },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      },
+    )
   } catch (error) {
-    console.error("Error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: corsHeaders })
+    console.error("Error in get_past_usernames POST:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
+}
+
+export async function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    },
+  )
 }
