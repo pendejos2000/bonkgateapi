@@ -1,8 +1,10 @@
 export class TotoApi {
   private baseUrl: string
+  private apiKey: string
 
   constructor() {
     this.baseUrl = process.env.TOTO_API_URL || "https://toto.oz.xyz/api"
+    this.apiKey = process.env.TOTO_API_KEY || ""
   }
 
   private async makeRequest(endpoint: string, body: any) {
@@ -11,6 +13,7 @@ export class TotoApi {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-api-key": this.apiKey,
         },
         body: JSON.stringify(body),
       })
@@ -50,16 +53,17 @@ export class TotoApi {
     })
   }
 
-  async fetchFollowerCount(username: string, page: number = 1) {
-    return this.makeRequest("/metadata/get_follower_count", {
+  // Graph API - Get actual follower list (not just count)
+  async fetchFollowers(username: string, page: number = 1) {
+    return this.makeRequest("/graph/get_followers", {
       user: username,
       how: "username",
       page,
     })
   }
 
-  async fetchFollowers(username: string, page: number = 1) {
-    return this.makeRequest("/metadata/get_current_num_followers", {
+  async fetchFollowerCount(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_follower_count", {
       user: username,
       how: "username",
       page,
