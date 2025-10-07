@@ -62,6 +62,15 @@ export class TotoApi {
     })
   }
 
+  // Graph API - Get scored followers (top 20 highest-scoring)
+  async fetchScoredFollowers(username: string, page: number = 1) {
+    return this.makeRequest("/graph/get_scored_followers", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
   async fetchFollowerCount(username: string, page: number = 1) {
     return this.makeRequest("/metadata/get_follower_count", {
       user: username,

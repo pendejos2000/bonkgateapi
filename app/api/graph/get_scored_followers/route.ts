@@ -28,27 +28,28 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
     const username = searchParams.get("username")
-    const limit = Number.parseInt(searchParams.get("limit") || "10")
+    const limit = Number.parseInt(searchParams.get("limit") || "20")
 
     if (!username) {
       return NextResponse.json({ error: "Username parameter is required" }, { status: 400 })
     }
 
     const api = new TotoApi()
-    const followers = await api.fetchFollowers(username)
+    const response = await api.fetchScoredFollowers(username)
 
-    if (!followers || followers.length === 0) {
+    // Extract the followers array from nested response: response.data.data
+    const followersData = response?.data?.data || []
+
+    if (!followersData || followersData.length === 0) {
       return NextResponse.json({ error: "No followers found" }, { status: 404 })
     }
 
-    const scoredFollowers = followers.map((follower: Follower) => ({
-      ...follower,
-      score: calculateFollowerScore(follower),
-    }))
+    // Followers already have scores from the API, just sort and limit
+    const sortedFollowers = [...followersData].sort((a: any, b: any) => 
+      (b.follower_score || 0) - (a.follower_score || 0)
+    )
 
-    scoredFollowers.sort((a: any, b: any) => b.score - a.score)
-
-    const topFollowers = scoredFollowers.slice(0, limit)
+    const topFollowers = sortedFollowers.slice(0, limit)
 
     return NextResponse.json(
       { scoredFollowers: topFollowers },
@@ -70,27 +71,28 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { username, limit = 10 } = body
+    const { username, limit = 20 } = body
 
     if (!username) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })
     }
 
     const api = new TotoApi()
-    const followers = await api.fetchFollowers(username)
+    const response = await api.fetchScoredFollowers(username)
 
-    if (!followers || followers.length === 0) {
+    // Extract the followers array from nested response: response.data.data
+    const followersData = response?.data?.data || []
+
+    if (!followersData || followersData.length === 0) {
       return NextResponse.json({ error: "No followers found" }, { status: 404 })
     }
 
-    const scoredFollowers = followers.map((follower: Follower) => ({
-      ...follower,
-      score: calculateFollowerScore(follower),
-    }))
+    // Followers already have scores from the API, just sort and limit
+    const sortedFollowers = [...followersData].sort((a: any, b: any) => 
+      (b.follower_score || 0) - (a.follower_score || 0)
+    )
 
-    scoredFollowers.sort((a: any, b: any) => b.score - a.score)
-
-    const topFollowers = scoredFollowers.slice(0, limit)
+    const topFollowers = sortedFollowers.slice(0, limit)
 
     return NextResponse.json(
       { scoredFollowers: topFollowers },

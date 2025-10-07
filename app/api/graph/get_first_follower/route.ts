@@ -13,13 +13,16 @@ export async function GET(request: NextRequest) {
     }
 
     const api = new TotoApi()
-    const followers = await api.fetchFollowers(username)
+    const response = await api.fetchFollowers(username)
 
-    if (!followers || followers.length === 0) {
+    // Extract the followers array from nested response: response.data.data
+    const followersData = response?.data?.data || []
+
+    if (!followersData || followersData.length === 0) {
       return NextResponse.json({ error: "No followers found" }, { status: 404 })
     }
 
-    const firstFollower = followers[0]
+    const firstFollower = followersData[0]
 
     return NextResponse.json(
       { firstFollower },
@@ -48,13 +51,16 @@ export async function POST(request: NextRequest) {
     }
 
     const api = new TotoApi()
-    const followers = await api.fetchFollowers(username)
+    const response = await api.fetchFollowers(username)
 
-    if (!followers || followers.length === 0) {
+    // Extract the followers array from nested response: response.data.data
+    const followersData = response?.data?.data || []
+
+    if (!followersData || followersData.length === 0) {
       return NextResponse.json({ error: "No followers found" }, { status: 404 })
     }
 
-    const firstFollower = followers[0]
+    const firstFollower = followersData[0]
 
     return NextResponse.json(
       { firstFollower },
