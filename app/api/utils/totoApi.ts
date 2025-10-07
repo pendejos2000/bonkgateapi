@@ -4,7 +4,7 @@ export class TotoApi {
 
   constructor() {
     this.baseUrl = process.env.TOTO_API_URL || "https://toto.oz.xyz/api"
-    this.apiKey = process.env.TOTO_API_KEY || ""
+    this.apiKey = process.env.TOTO_API_KEY || "0c33e8e7087afdcf3fded8a539e1c1e8"
   }
 
   private async makeRequest(endpoint: string, body: any) {
