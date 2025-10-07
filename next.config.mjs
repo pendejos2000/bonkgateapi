@@ -9,6 +9,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Ensure proper serverless function configuration for Vercel
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
   async headers() {
     return [
       {

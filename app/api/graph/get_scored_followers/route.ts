@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { TotoApi } from "../../utils/totoApi"
 
+export const runtime = 'nodejs'
+
 interface Follower {
   id: string
   username: string

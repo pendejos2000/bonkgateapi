@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { TotoApi } from "../../../../utils/totoApi"
 
+export const runtime = 'nodejs'
+
 export async function GET(request: NextRequest, { params }: { params: { contract_address: string } }) {
   try {
     const { contract_address } = params
