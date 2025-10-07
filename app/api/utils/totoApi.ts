@@ -12,6 +12,7 @@ export class TotoApi {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         method: "POST",
         headers: {
+          "accept": "application/json",
           "Content-Type": "application/json",
           "x-api-key": this.apiKey,
         },

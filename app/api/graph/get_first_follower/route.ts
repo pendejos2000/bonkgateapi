@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     const response = await api.fetchFollowers(username)
 
     // Extract the followers array from nested response: response.data.data
-    const followersData = response?.data?.data || []
+    const followersData = response?.data || []
 
     if (!followersData || followersData.length === 0) {
       return NextResponse.json({ error: "No followers found" }, { status: 404 })
