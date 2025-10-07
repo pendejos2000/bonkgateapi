@@ -60,10 +60,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No followers found" }, { status: 404 })
     }
 
-    const firstFollower = followersData[0]
 
     return NextResponse.json(
-      { firstFollower },
+      { followersData },
       {
         status: 200,
         headers: {
