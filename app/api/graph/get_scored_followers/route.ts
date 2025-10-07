@@ -67,22 +67,8 @@ export async function POST(request: NextRequest) {
     const api = new TotoApi()
     const response = await api.fetchScoredFollowers(username)
 
-    // Extract the followers array from nested response: response.data.data
-    const followersData = response?.data?.data || []
-
-    if (!followersData || followersData.length === 0) {
-      return NextResponse.json({ error: "No followers found" }, { status: 404 })
-    }
-
-    // Followers already have scores from the API, just sort and limit
-    const sortedFollowers = [...followersData].sort((a: any, b: any) => 
-      (b.follower_score || 0) - (a.follower_score || 0)
-    )
-
-    const topFollowers = sortedFollowers.slice(0, limit)
-
     return NextResponse.json(
-      { scoredFollowers: topFollowers },
+      { response },
       {
         status: 200,
         headers: {

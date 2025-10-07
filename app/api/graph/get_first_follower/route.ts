@@ -15,17 +15,10 @@ export async function GET(request: NextRequest) {
     const api = new TotoApi()
     const response = await api.fetchFollowers(username)
 
-    // Extract the followers array from nested response: response.data.data
-    const followersData = response?.data?.data || []
 
-    if (!followersData || followersData.length === 0) {
-      return NextResponse.json({ error: "No followers found" }, { status: 404 })
-    }
-
-    const firstFollower = followersData[0]
 
     return NextResponse.json(
-      { firstFollower },
+      { response },
       {
         status: 200,
         headers: {
@@ -53,16 +46,8 @@ export async function POST(request: NextRequest) {
     const api = new TotoApi()
     const response = await api.fetchFollowers(username)
 
-    // Extract the followers array from nested response: response.data.data
-    const followersData = response?.data || []
-
-    if (!followersData || followersData.length === 0) {
-      return NextResponse.json({ error: "No followers found" }, { status: 404 })
-    }
-
-
     return NextResponse.json(
-      { followersData },
+      { response },
       {
         status: 200,
         headers: {
