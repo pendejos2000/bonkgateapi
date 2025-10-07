@@ -55,10 +55,11 @@ export class TotoApi {
 
   // Graph API - Get actual follower list (not just count)
   async fetchFollowers(username: string, page: number = 1) {
-    return this.makeRequest("/graph/get_followers", {
+    return this.makeRequest("/graph/get_first_followers", {
       user: username,
       how: "username",
       page,
+      with_pfp: true
     })
   }
 
@@ -68,6 +69,7 @@ export class TotoApi {
       user: username,
       how: "username",
       page,
+      with_pfp: true
     })
   }
 
