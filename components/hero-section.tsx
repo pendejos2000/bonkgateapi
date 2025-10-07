@@ -118,7 +118,7 @@ export default function HeroSection() {
             size="lg"
             className="rounded-xl border-4 border-black font-bold text-xl px-8 py-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-4px] transition-transform bg-transparent"
           >
-            <a href="https://docs.bonkgate.fun/" target="_blank" rel="noopener noreferrer">
+            <a href="https://docs.fouryoursafety.fun/" target="_blank" rel="noopener noreferrer">
               <FileText className="mr-2 h-6 w-6" />
               Installation Guide
             </a>
