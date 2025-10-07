@@ -2,120 +2,173 @@ export class TotoApi {
   private baseUrl: string
 
   constructor() {
-    this.baseUrl = process.env.TOTO_API_URL || "https://api.toto.com"
+    this.baseUrl = process.env.TOTO_API_URL || "https://toto.oz.xyz/api"
   }
 
-  async fetchUserData(username: string) {
+  private async makeRequest(endpoint: string, body: any) {
     try {
-      const response = await fetch(`${this.baseUrl}/user/${username}`, {
+      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(body),
       })
 
+      const responseText = await response.text()
+
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
+        console.error(`API error ${response.status}. Response body:`, responseText)
+        throw new Error(`API error: ${response.status} - ${responseText.substring(0, 200)}`)
       }
 
-      return await response.json()
+      try {
+        return JSON.parse(responseText)
+      } catch (jsonError) {
+        console.error("Failed to parse JSON. Response text:", responseText)
+        throw new Error(`Invalid JSON response: ${responseText.substring(0, 200)}`)
+      }
     } catch (error) {
-      console.error("Error fetching user data:", error)
+      console.error(`Error calling ${endpoint}:`, error)
       throw error
     }
   }
 
-  async fetchFollowers(username: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/followers/${username}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error("Error fetching followers:", error)
-      throw error
-    }
+  async fetchCurrentMetadata(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_current_metadata", {
+      user: username,
+      how: "username",
+      page,
+    })
   }
 
-  async fetchBioHistory(username: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/bio-history/${username}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error("Error fetching bio history:", error)
-      throw error
-    }
+  async fetchLatestMetadata(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_latest_metadata", {
+      user: username,
+      how: "username",
+      page,
+    })
   }
 
-  async fetchDeletedTweets(username: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/deleted-tweets/${username}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error("Error fetching deleted tweets:", error)
-      throw error
-    }
+  async fetchFollowerCount(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_follower_count", {
+      user: username,
+      how: "username",
+      page,
+    })
   }
 
-  async fetchPastUsernames(username: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/past-usernames/${username}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error("Error fetching past usernames:", error)
-      throw error
-    }
+  async fetchFollowers(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_current_num_followers", {
+      user: username,
+      how: "username",
+      page,
+    })
   }
 
+  async fetchBioHistory(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_bio_history", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchDeletedTweets(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_deleted_tweets", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchLatestTweets(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_latest_tweets", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchTweets(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_tweets", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchPastUsernames(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_past_usernames", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchMetadataHistory(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_metadata_history", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchUserId(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_userid", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchUserMentionedContracts(username: string, chain?: string, page: number = 1) {
+    const body: any = {
+      user: username,
+      how: "username",
+      page,
+    }
+    if (chain) {
+      body.chain = chain
+    }
+    return this.makeRequest("/metadata/get_user_mentioned_contracts", body)
+  }
+
+  async fetchTweetsByIds(tweetIds: string) {
+    return this.makeRequest("/metadata/get_tweets_by_ids", {
+      tweet_ids: tweetIds,
+    })
+  }
+
+  async fetchCurrentNumTweets(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_current_num_tweets", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchCurrentNumFollowing(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_current_num_following", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  async fetchCurrentNumFollowers(username: string, page: number = 1) {
+    return this.makeRequest("/metadata/get_current_num_followers", {
+      user: username,
+      how: "username",
+      page,
+    })
+  }
+
+  // Token info endpoint - not documented in Toto API, might be a separate service
   async fetchTokenInfo(contractAddress: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/token/${contractAddress}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error("Error fetching token info:", error)
-      throw error
-    }
+    // This endpoint structure is a placeholder - update based on actual API
+    return this.makeRequest("/token/info", {
+      contract_address: contractAddress,
+    })
   }
 }
