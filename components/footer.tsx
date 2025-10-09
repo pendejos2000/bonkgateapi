@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Twitter, Github, MessageCircle } from "lucide-react"
+import { Twitter, Github } from "lucide-react"
 
 export default function Footer() {
   const scrollToSection = (id: string) => {
@@ -107,14 +107,6 @@ export default function Footer() {
                 className="bg-gray-800 p-3 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
               >
                 <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://t.me/fouryoursafety"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 p-3 rounded-lg hover:bg-[#F0B90B] transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-              >
-                <MessageCircle className="w-5 h-5" />
               </a>
             </div>
             <p className="text-gray-400 text-sm">
