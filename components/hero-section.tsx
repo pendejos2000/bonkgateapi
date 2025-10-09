@@ -64,10 +64,7 @@ export default function HeroSection() {
             </div>
             <div className="bg-black">
               <video ref={videoRef} className="w-full h-auto" controls autoPlay onEnded={closeVideoModal}>
-                <source
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cursorful-video-1752355234862-8dH7YbbgQn528p6WPH6j0lgbNOuMrJ.mp4"
-                  type="video/mp4"
-                />
+                <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fysdemo-xzz24iL2UAWgMkfN081PF1Qfx3w1vs.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
