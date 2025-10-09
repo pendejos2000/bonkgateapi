@@ -109,9 +109,7 @@ export default function Footer() {
                 <Github className="w-5 h-5" />
               </a>
             </div>
-            <p className="text-gray-400 text-sm">
-              Join our community and stay updated with the latest features and updates.
-            </p>
+            
           </div>
         </div>
 
