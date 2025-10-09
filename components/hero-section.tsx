@@ -37,7 +37,7 @@ export default function HeroSection() {
     <div className="space-y-12">
       {/* Video Pop-up */}
       {isVideoOpen && (
-        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-full max-w-md animate-slide-in-up">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-full max-w-md">
           <Card className="border-4 border-black rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <div className="flex items-center justify-between p-3 border-b-4 border-black bg-white/80 backdrop-blur-sm">
               <h3 className="font-bold text-lg">FourYourSafety Demo</h3>
