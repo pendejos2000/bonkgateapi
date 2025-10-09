@@ -107,7 +107,7 @@ export default function HeroSection() {
             size="lg"
             className="bg-bonk-orange hover:bg-bonk-orange/80 text-white rounded-xl border-4 border-black font-bold text-xl px-8 py-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-4px] transition-transform"
           >
-            <a href="https://github.com/BonkGate-Labs/BonkGate-Extension" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/fouryoursafety" target="_blank" rel="noopener noreferrer">
               <Globe className="mr-2 h-6 w-6" />
               Add to Browser <ArrowRight className="ml-2 h-6 w-6" />
             </a>
@@ -374,7 +374,7 @@ export default function HeroSection() {
             size="lg"
             className="bg-white text-bonk-orange hover:bg-gray-100 rounded-xl border-4 border-black font-bold text-xl px-8 py-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
           >
-            <a href="https://github.com/BonkGate-Labs/BonkGate-Extension" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/fouryoursafety" target="_blank" rel="noopener noreferrer">
               <Globe className="mr-2 h-6 w-6" />
               Add to Browser
             </a>
